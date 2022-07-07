@@ -1,0 +1,8 @@
+{
+  "country": "Pays",
+  "address": "Numére et adresse",
+  "postalCode": "Code postal",
+  "city": "Ville",
+  "province": "Province",
+  "moreInfo": "Información adicional"
+}

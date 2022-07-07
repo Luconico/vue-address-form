@@ -1,0 +1,22 @@
+{
+  "country": "País",
+  "address": "Dirección",
+  "postalCode": "Código postal",
+  "city": "Ciudad",
+  "province": "Provincia",
+  "moreInfo": "Información adicional",
+  "countries": {
+    "ES": "España",
+    "DE": "Francia",
+    "AD": "Andorra"
+  },
+  "msg": {
+    "required": "Este campo es requerido",
+    "addressSaved": "Dirección guardada",
+    "countryRequired": "El campo País es obligatorio",
+    "addressRequired": "El campo Dirección es obligatorio",
+    "postalCodeRequired": "El campo Código postal es obligatorio",
+    "cityRequired": "El campo Ciudad es obligatorio",
+    "provinceRequired": "El campo Provincia es obligatorio"
+  }
+}
