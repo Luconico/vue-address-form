@@ -4,5 +4,19 @@
   "postalCode": "Code postal",
   "city": "Ville",
   "province": "Province",
-  "moreInfo": "Información adicional"
+  "moreInfo": "Plus d'informations",
+  "countries": {
+    "ES": "Espagne",
+    "DE": "Allemagne",
+    "AD": "Andorre"
+  },
+  "msg": {
+    "required": "Ce champ est obligatoire",
+    "addressSaved": "Adresse enregistrée",
+    "countryRequired": "Pays requis",
+    "addressRequired": "Adresse requise",
+    "postalCodeRequired": "Code postal requis",
+    "cityRequired": "Ville requise",
+    "provinceRequired": "Province requise"
+  }
 }

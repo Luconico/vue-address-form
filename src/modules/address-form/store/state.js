@@ -7,35 +7,35 @@ export default () => ({
             address: {
                 value: '',
                 require: true,
-                needed: true
-            },
-            country: {
-                value: '',
-                require: true,
-                needed: true
+                needed: true,
+                type: 'text',
             },
             postalCode: {
                 value: '',
                 require: true,
-                needed: true
+                needed: true,
+                type: 'text'
             },
             city: {
                 value: '',
-                require: true,
-                needed: true
+                require: false,
+                needed: true,
+                type: 'text'
             },
             province: {
                 value: '',
-                require: true,
-                needed: true
+                require: false,
+                needed: false,
+                type: 'select'
             },
             moreInfo: {
                 value: '',
-                require: true,
-                needed: true
+                require: false,
+                needed: true,
+                type: 'textarea'
             },
         },
         messages: []
     },
-    countries: [],
+    selectOptions: [],
 })

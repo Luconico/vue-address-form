@@ -5,10 +5,22 @@
   "city": "Ciudad",
   "province": "Provincia",
   "moreInfo": "Información adicional",
-  "countries": {
-    "ES": "España",
-    "DE": "Francia",
-    "AD": "Andorra"
+  "selectOptions": {
+    "country": {
+      "ES": "España",
+      "DE": "Alemania", 
+      "AD": "Andorra"
+    },
+    "province": {
+      "madrid": "Madrid",
+      "barcelona": "Barcelona",
+      "valencia": "Valencia",
+      "sevilla": "Sevilla",
+      "caceres": "Caceres",
+      "jaen": "Jaen",
+      "malaga": "Málaga",
+      "cadiz": "Cádiz"
+    }
   },
   "msg": {
     "required": "Este campo es requerido",
@@ -18,5 +30,8 @@
     "postalCodeRequired": "El campo Código postal es obligatorio",
     "cityRequired": "El campo Ciudad es obligatorio",
     "provinceRequired": "El campo Provincia es obligatorio"
+  },
+  "buttons": {
+    "save": "Guardar"
   }
 }

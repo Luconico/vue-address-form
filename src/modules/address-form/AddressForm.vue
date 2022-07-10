@@ -1,71 +1,55 @@
 <template>
-  <h2>Hi {{ $t("msg.postalCodeRequired") }}</h2>
+  <h2>Hi {{ $t("address") }}</h2>
 
   <AlertMessage
     v-for="(message, key) in addressForm.messages"
     :key="key"
     :message="message"
   />
-  <LoaderSpinner size="20px" color="gray" />
 
   <form id="address-form" @submit.prevent="onSubmit">
-      
-    <div class="custom-form-group" v-if="addressForm.needed.country">
-      <span>{{ $t("country") }}</span>
-      <select v-model="addressForm.fields.country">
-        <option v-for="{ code } in countries" :key="code">
-          {{ $t(`countries.${code}`) }}
-        </option>
-      </select>
-    </div>
-
-    <div class="custom-form-group" v-if="addressForm.needed.address">
-      <span>{{ $t("address") }}</span>
-      <input type="text" v-model="addressForm.fields.address" />
-    </div>
-
-    <div class="custom-form-group" v-if="addressForm.needed.postalCode">
-      <span>{{ $t("postalCode") }}</span>
-      <input type="text" v-model="addressForm.fields.postalCode" />
-    </div>
-
-    <div class="custom-form-group" v-if="addressForm.needed.city">
-      <span>{{ $t("city") }}</span>
-      <input type="text" v-model="addressForm.fields.city" />
-    </div>
-
-    <div class="custom-form-group" v-if="addressForm.needed.province">
-      <span>{{ $t("province") }}</span>
-      <input type="text" v-model="addressForm.fields.province" />
-    </div>
-
-    <div class="custom-form-group" v-if="addressForm.needed.moreInfo">
-      <span>{{ $t("moreInfo") }}</span>
-      <textarea v-model="addressForm.fields.moreInfo" />
-    </div>
-
-    <button :disabled="addressForm.submited">Save</button>
+    <InputBuilder
+      type="select"
+      :label="$t('country')"
+      :required="true"
+      v-model="country"
+      :options="selectOptions['country'] ? selectOptions['country'].value : null"
+    />
+    <template v-for="(field, index) in addressForm.fields" :key="index">
+      <InputBuilder
+        v-if="field.needed"
+        :type="field.type"
+        :disabled="country.length < 1"
+        :label="$t(index)"
+        :required="field.require"
+        v-model="field.value"
+        :options="selectOptions[index] ? selectOptions[index].value : null"
+      />
+    </template>
+    <button class="btn btn-secondary" :disabled="addressForm.submited">
+      {{$t('buttons.save')}}
+    </button>
   </form>
 </template>
 
 <script>
 import AlertMessage from "@/shared/alert-message/AlertMessage.vue";
-import LoaderSpinner from "@/shared/loader-spinner/LoaderSpinner.vue";
 import useAddressForm from "./composables/useAddressForm";
+import InputBuilder from "../input-builder/InputBuilder.vue";
 
 export default {
   name: "address-form",
   components: {
     AlertMessage,
-    LoaderSpinner,
+    InputBuilder,
   },
   setup() {
-    const { addressForm, onSubmit, countries } = useAddressForm();
-
+    const { country, addressForm, onSubmit, selectOptions } = useAddressForm();
     return {
+      country,
       addressForm,
       onSubmit,
-      countries,
+      selectOptions,
     };
   },
 };

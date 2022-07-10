@@ -4,5 +4,39 @@
   "postalCode": "Postal code",
   "city": "City",
   "province": "Province",
-  "moreInfo": "Información adicional"
+  "moreInfo": "Additional information",
+  "countries": {
+    "ES": "Spain",
+    "DE": "Germany",
+    "AD": "Andorra"
+  },
+  "selectOptions": {
+    "country": {
+      "ES": "Spain",
+      "DE": "Germany", 
+      "AD": "Andorra"
+    },
+    "province": {
+      "madrid": "Madrid",
+      "barcelona": "Barcelona",
+      "valencia": "Valencia",
+      "sevilla": "Sevilla",
+      "caceres": "Caceres",
+      "jaen": "Jaen",
+      "malaga": "Málaga",
+      "cadiz": "Cádiz"
+    }
+  },
+  "msg": {
+    "required": "This field is required",
+    "addressSaved": "Address saved",
+    "countryRequired": "Country is required",
+    "addressRequired": "Address is required",
+    "postalCodeRequired": "Postal code is required",
+    "cityRequired": "City is required",
+    "provinceRequired": "Province is required"
+  },
+  "buttons": {
+    "save": "Save"
+  }
 }
