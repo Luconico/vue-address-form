@@ -1,16 +1,28 @@
 
 
 
-export const getCountrySelect = async ({ commit }) => {
+export const getCountrySelect = async ({ commit }, country) => {
 
-    let newSelect = {
-        select: 'country',
-        options: [
-            { value: 'ES' },
-            { value: 'DE' },
-            { value: 'AD' },
-        ]
+    const countries = {
+        ES: {
+            select: 'country',
+            options: [
+                { value: 'ES' },
+                { value: 'DE' },
+                { value: 'AD' },
+            ]
+        },
+        EN: {
+            select: 'country',
+            options: [
+                { value: 'UK' },
+                { value: 'DE' },
+                { value: 'AD' },
+            ]
+        }
     } // TODO: REQUEST FOR COUNTRIES
+    const newSelect = countries[country.toUpperCase()]
+    if (!newSelect) return
     setTimeout(() => {
         commit('setSelectOptions', { newSelect })
     }, 1000)

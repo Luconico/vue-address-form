@@ -9,7 +9,9 @@
     "country": {
       "ES": "España",
       "DE": "Alemania", 
-      "AD": "Andorra"
+      "AD": "Andorra",
+      "FR": "Francia",
+      "UK": "Reino Unido"
     },
     "province": {
       "madrid": "Madrid",

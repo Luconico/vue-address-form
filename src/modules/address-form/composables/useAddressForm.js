@@ -8,7 +8,7 @@ const useAddressForm = () => {
   const addressForm = computed(() => store.getters['addressForm/form'])
 
   onMounted(() => {
-    store.dispatch('addressForm/getCountrySelect')
+    store.dispatch('addressForm/getCountrySelect', window.location.pathname.split('/')[1])
   })
 
   watch(country, (currentValue) => {
@@ -18,8 +18,7 @@ const useAddressForm = () => {
 
   const isValidForm = () => {
     addressForm.value.messages = []
-    if (country.value === '')
-        addressForm.value.messages.push({ msgType: "error", value: `msg.countryRequired` })
+    if (country.value === '') addressForm.value.messages.push({ msgType: "error", value: `msg.countryRequired` })
     Object.keys(addressForm.value.fields).forEach(key => {
       if (addressForm.value.fields[key].require && addressForm.value.fields[key].needed && addressForm.value.fields[key].value === '')
         addressForm.value.messages.push({ msgType: "error", value: `msg.${key}Required` })

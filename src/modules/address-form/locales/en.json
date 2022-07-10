@@ -5,16 +5,13 @@
   "city": "City",
   "province": "Province",
   "moreInfo": "Additional information",
-  "countries": {
-    "ES": "Spain",
-    "DE": "Germany",
-    "AD": "Andorra"
-  },
   "selectOptions": {
     "country": {
       "ES": "Spain",
       "DE": "Germany", 
-      "AD": "Andorra"
+      "AD": "Andorra",
+      "FR": "France",
+      "UK": "United Kingdom"
     },
     "province": {
       "madrid": "Madrid",
