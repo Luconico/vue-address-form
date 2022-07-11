@@ -20,8 +20,11 @@ const useAddressForm = () => {
     addressForm.value.messages = []
     if (country.value === '') addressForm.value.messages.push({ msgType: "error", value: `msg.countryRequired` })
     Object.keys(addressForm.value.fields).forEach(key => {
-      if (addressForm.value.fields[key].require && addressForm.value.fields[key].needed && addressForm.value.fields[key].value === '')
+      addressForm.value.fields[key].error = false
+      if (addressForm.value.fields[key].require && addressForm.value.fields[key].needed && addressForm.value.fields[key].value === '') {
+        addressForm.value.fields[key].error = true
         addressForm.value.messages.push({ msgType: "error", value: `msg.${key}Required` })
+      }
     })
     return addressForm.value.messages.length === 0
   }
@@ -30,7 +33,8 @@ const useAddressForm = () => {
     country,
     addressForm,
     onSubmit: () => {
-      if (!isValidForm()) return
+      if (!isValidForm()) return 
+      // TODO: store.dispatch('addressForm/saveAddressForm')
       addressForm.value.messages = [{ msgType: "success", value: "msg.addressSaved" }]
       addressForm.value.submited = true;
     },
