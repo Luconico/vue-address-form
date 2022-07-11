@@ -1,6 +1,6 @@
 <template>
   <template v-if="type === 'text'">
-    <div class="custom-form-group">
+    <div :class="customClass">
       <span
         >{{ label }}
         <span :title="$t('msg.required')" v-if="required">*</span></span
@@ -10,7 +10,7 @@
   </template>
 
   <template v-else-if="type === 'select'">
-    <div class="custom-form-group">
+    <div :class="customClass">
       <span
         >{{ label }} 
         <span :title="$t('msg.required')" v-if="required">*</span><LoaderSpinner v-if="!options" color="gray" size="1rem" /></span
@@ -31,7 +31,7 @@
   </template>
 
   <template v-else-if="type === 'textarea'">
-    <div class="custom-form-group">
+    <div :class="customClass">
       <span
         >{{ label }}
         <span :title="$t('msg.required')" v-if="required">*</span></span
@@ -74,6 +74,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+    },
+    customClass: {
+      type: Object,
+      default: () => ({}),
     },
     options: {
       type: Object,

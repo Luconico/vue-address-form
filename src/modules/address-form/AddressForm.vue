@@ -14,6 +14,7 @@
       :required="true"
       v-model="country"
       :options="selectOptions['country'] ? selectOptions['country'].value : null"
+      :customClass="{'custom-form-group': true}"
     />
     <template v-for="(field, index) in addressForm.fields" :key="index">
       <InputBuilder
@@ -24,6 +25,7 @@
         :required="field.require"
         v-model="field.value"
         :options="selectOptions[index] ? selectOptions[index].value : null"
+        :customClass="{'custom-form-group': true}"
       />
     </template>
     <button class="btn btn-secondary" :disabled="addressForm.submited">
