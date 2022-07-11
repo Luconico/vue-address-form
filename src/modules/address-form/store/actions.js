@@ -48,7 +48,7 @@ export const getProvinceSelect = async ({ commit }, country) => {
 }
 
 export const getAddressForm = async ({ commit }, country) => {
-
+    commit('setFetching', { fetching: true })
     const form = {
         ES: {
             saving: false,
@@ -181,6 +181,19 @@ export const getAddressForm = async ({ commit }, country) => {
     if (!addressForm) return
     setTimeout(() => {
         commit('setForm', { addressForm })
-    }, 10)
+        commit('setFetching', { fetching: false })
+    }, 500)
 
+}
+
+
+export const saveAddressForm = async ({ commit, state }) => {
+    commit('checkErrors')
+    if (state.addressForm.messages.length > 0) return
+    commit('setSaving', { saving: true })
+    // TODO: REQUEST FOR SAVE ADDRESS FORM
+    const isSaved = true
+    setTimeout(() => {
+        if (isSaved) commit('setSubmited')
+    }, 2000)
 }

@@ -16,32 +16,16 @@ const useAddressForm = () => {
     store.dispatch('addressForm/getProvinceSelect', currentValue)
   });
 
-  const isValidForm = () => {
-    addressForm.value.messages = []
-    if (country.value === '') addressForm.value.messages.push({ msgType: "error", value: `msg.countryRequired` })
-    Object.keys(addressForm.value.fields).forEach(key => {
-      addressForm.value.fields[key].error = false
-      if (addressForm.value.fields[key].require && addressForm.value.fields[key].needed && addressForm.value.fields[key].value === '') {
-        addressForm.value.fields[key].error = true
-        addressForm.value.messages.push({ msgType: "error", value: `msg.${key}Required` })
-      }
-    })
-    return addressForm.value.messages.length === 0
-  }
-
   return {
     country,
     addressForm,
-    onSubmit: () => {
-      if (!isValidForm()) return 
-      // TODO: store.dispatch('addressForm/saveAddressForm')
-      addressForm.value.messages = [{ msgType: "success", value: "msg.addressSaved" }]
-      addressForm.value.submited = true;
-    },
+    isDisabled: computed(() => store.getters['addressForm/isDisabled']),
+    buttonText: computed(() => store.getters['addressForm/buttonText']),
+    onSubmit: () => { store.dispatch('addressForm/saveAddressForm') },
     selectOptions: {
       country: computed(() => store.getters['addressForm/selectOptions']('country')),
       province: computed(() => store.getters['addressForm/selectOptions']('province'))
-    },
+    }
   };
 
 }

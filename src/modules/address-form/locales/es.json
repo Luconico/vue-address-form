@@ -34,6 +34,8 @@
     "provinceRequired": "El campo Provincia es obligatorio"
   },
   "buttons": {
-    "save": "Guardar"
+    "save": "Añadir dirección",
+    "saving": "Añadiendo dirección...",
+    "saved": "Dirección añadida"
   }
 }

@@ -7,20 +7,23 @@
     :message="message"
   />
 
-  <form id="address-form" @submit.prevent="onSubmit">
+  <form id="address-form" class="custom-form" @submit.prevent="onSubmit">
     <InputBuilder
       type="select"
       :label="$t('country')"
       :required="true"
       v-model="country"
-      :options="selectOptions['country'] ? selectOptions['country'].value : null"
+      :disabled="isDisabled"
+      :options="
+        selectOptions['country'] ? selectOptions['country'].value : null
+      "
       :customClass="{ 'custom-form-group': true }"
     />
     <template v-for="(field, index) in addressForm.fields" :key="index">
       <InputBuilder
         v-if="field.needed"
         :type="field.type"
-        :disabled="country.length < 1"
+        :disabled="country.length < 1 || isDisabled"
         :label="$t(index)"
         :required="field.require"
         v-model="field.value"
@@ -30,9 +33,11 @@
     </template>
     <button
       class="btn btn-secondary"
-      :disabled="addressForm.submited || addressForm.saving || country.length < 1"
+      :disabled="country.length < 1 || isDisabled"
     >
-      {{ $t("buttons.save") }}
+      <LoaderSpinner v-if="addressForm.saving" color="gray" size="1rem" />{{
+        $t(`buttons.${buttonText}`)
+      }}
     </button>
   </form>
 </template>
@@ -41,18 +46,22 @@
 import AlertMessage from "@/shared/alert-message/AlertMessage.vue";
 import InputBuilder from "@/shared/input-builder/InputBuilder.vue";
 import useAddressForm from "./composables/useAddressForm";
+import LoaderSpinner from "@/shared/loader-spinner/LoaderSpinner.vue";
 
 export default {
   name: "address-form",
   components: {
     AlertMessage,
     InputBuilder,
+    LoaderSpinner,
   },
   setup() {
-    const { country, addressForm, onSubmit, selectOptions } = useAddressForm();
+    const { country, addressForm, isDisabled, buttonText, onSubmit, selectOptions, } = useAddressForm();
     return {
       country,
+      isDisabled,
       addressForm,
+      buttonText,
       onSubmit,
       selectOptions,
     };
@@ -61,15 +70,15 @@ export default {
 </script>
 
 <style>
-.custom-form-group {
+.custom-form .custom-form-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
 }
 
-.custom-form-group.--error > input,
-.custom-form-group.--error > select,
-.custom-form-group.--error > textarea {
+.custom-form .custom-form-group.--error > input,
+.custom-form .custom-form-group.--error > select,
+.custom-form .custom-form-group.--error > textarea {
   border: 1px solid red;
   box-shadow: 0px 0px 5px 0px rgb(255 0 0);
 }

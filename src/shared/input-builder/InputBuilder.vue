@@ -82,7 +82,7 @@ export default {
     options: {
       type: Object,
       default: () => ({}),
-    },
+    }
   },
   setup(props, context) {
     return {
