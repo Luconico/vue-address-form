@@ -14,9 +14,7 @@
       :required="true"
       v-model="country"
       :disabled="isDisabled"
-      :options="
-        selectOptions['country'] ? selectOptions['country'].value : null
-      "
+      :options="selectOptions['country'] ? selectOptions['country'].value : null"
       :customClass="{ 'custom-form-group': true }"
     />
     <template v-for="(field, index) in addressForm.fields" :key="index">
@@ -35,7 +33,7 @@
       class="btn btn-secondary"
       :disabled="country.length < 1 || isDisabled"
     >
-      <LoaderSpinner v-if="addressForm.saving" color="gray" size="1rem" />{{
+      <LoaderSpinner v-if="isFetching" color="gray" size="1rem" />{{
         $t(`buttons.${buttonText}`)
       }}
     </button>
@@ -56,10 +54,11 @@ export default {
     LoaderSpinner,
   },
   setup() {
-    const { country, addressForm, isDisabled, buttonText, onSubmit, selectOptions, } = useAddressForm();
+    const { country, addressForm, isDisabled, isFetching, buttonText, onSubmit, selectOptions, } = useAddressForm();
     return {
       country,
       isDisabled,
+      isFetching,
       addressForm,
       buttonText,
       onSubmit,

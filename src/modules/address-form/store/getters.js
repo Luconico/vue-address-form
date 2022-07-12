@@ -19,3 +19,7 @@ export const buttonText = (state) => {
 export const isDisabled = (state) => {
     return (state.addressForm.saving || state.addressForm.submited || state.fetching)
 }
+
+export const isFetching = (state) => {
+    return (state.addressForm.saving || state.fetching)
+}

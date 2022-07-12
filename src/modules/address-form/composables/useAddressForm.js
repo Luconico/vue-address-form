@@ -7,6 +7,7 @@ const useAddressForm = () => {
   const country = ref('')
   const addressForm = computed(() => store.getters['addressForm/form'])
 
+  // TODO: GET EXISTING ADDRESS TO EDIT (IF ANY) AND SET IT
   onMounted(() => {
     store.dispatch('addressForm/getCountrySelect', window.location.pathname.split('/')[1])
   })
@@ -20,6 +21,7 @@ const useAddressForm = () => {
     country,
     addressForm,
     isDisabled: computed(() => store.getters['addressForm/isDisabled']),
+    isFetching: computed(() => store.getters['addressForm/isFetching']),
     buttonText: computed(() => store.getters['addressForm/buttonText']),
     onSubmit: () => { store.dispatch('addressForm/saveAddressForm') },
     selectOptions: {
