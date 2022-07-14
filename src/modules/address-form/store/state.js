@@ -42,6 +42,7 @@ export default () => ({
         },
         messages: []
     },
+    country: '',
     selectOptions: [],
     buttonText: 'save',
     fetching: false,

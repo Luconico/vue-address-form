@@ -2,7 +2,7 @@
 export default () => ({
     addressList: [{
         id: 1,
-        country: 'España',
+        country: 'ES',
         city: 'Málaga',
         address: 'Avenida de la Constitución, 1',
         postalCode: '29008',

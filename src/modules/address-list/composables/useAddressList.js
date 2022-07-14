@@ -6,6 +6,7 @@ const useAddressList = () => {
 
   return {
     list: computed(() => store.getters['addressList/list']),
+    newItem: (item) => store.commit('addressList/setListItem', { item })
   };
 
 }

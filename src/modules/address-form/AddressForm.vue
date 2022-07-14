@@ -1,6 +1,5 @@
 <template>
   <h2>Hi {{ $t("address") }}</h2>
-
   <AlertMessage
     v-for="(message, key) in addressForm.messages"
     :key="key"
@@ -14,7 +13,9 @@
       :required="true"
       v-model="country"
       :disabled="isDisabled"
-      :options="selectOptions['country'] ? selectOptions['country'].value : null"
+      :options="
+        selectOptions['country'] ? selectOptions['country'].value : null
+      "
       :customClass="{ 'custom-form-group': true }"
     />
     <template v-for="(field, index) in addressForm.fields" :key="index">
@@ -38,6 +39,7 @@
       }}
     </button>
   </form>
+   <button class="btn btn-secondary btn-sm mt-5" @click="reset">reset</button>
 </template>
 
 <script>
@@ -54,7 +56,16 @@ export default {
     LoaderSpinner,
   },
   setup() {
-    const { country, addressForm, isDisabled, isFetching, buttonText, onSubmit, selectOptions, } = useAddressForm();
+    const {
+      country,
+      addressForm,
+      isDisabled,
+      isFetching,
+      buttonText,
+      onSubmit,
+      selectOptions,
+      reset,
+    } = useAddressForm();
     return {
       country,
       isDisabled,
@@ -63,6 +74,7 @@ export default {
       buttonText,
       onSubmit,
       selectOptions,
+      reset,
     };
   },
 };

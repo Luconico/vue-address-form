@@ -3,13 +3,13 @@
 </template>
 
 <script>
-import AddressForm from '@/modules/address-form/AddressForm.vue';
+import AddressForm from "@/modules/address-form/AddressForm.vue";
 
 export default {
   name: "address-form",
   components: {
-    AddressForm
-  }
+    AddressForm,
+  },
 };
 </script>
 

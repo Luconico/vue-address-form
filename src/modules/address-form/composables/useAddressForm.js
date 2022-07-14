@@ -13,6 +13,7 @@ const useAddressForm = () => {
   })
 
   watch(country, (currentValue) => {
+    store.commit('addressForm/setCountry', { country: currentValue })
     store.dispatch('addressForm/getAddressForm', currentValue)
     store.dispatch('addressForm/getProvinceSelect', currentValue)
   });
@@ -27,7 +28,8 @@ const useAddressForm = () => {
     selectOptions: {
       country: computed(() => store.getters['addressForm/selectOptions']('country')),
       province: computed(() => store.getters['addressForm/selectOptions']('province'))
-    }
+    },
+    reset: () => { store.dispatch('addressForm/resetForm') }
   };
 
 }

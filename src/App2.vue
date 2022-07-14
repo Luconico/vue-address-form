@@ -1,16 +1,15 @@
 <template>
-    <AddressList />
+  <AddressList />
 </template>
 
 <script>
-import AddressList from '@/modules/address-list/AddressList.vue';
+import AddressList from "@/modules/address-list/AddressList.vue";
 
 export default {
-  name: "address-form",
+  name: "address-list",
   components: {
-    AddressList
-    
-  }
+    AddressList,
+  },
 };
 </script>
 
