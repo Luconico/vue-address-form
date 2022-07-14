@@ -1,0 +1,41 @@
+{
+  "country": "País",
+  "address": "Dirección",
+  "postalCode": "Código postal",
+  "city": "Ciudad",
+  "province": "Provincia",
+  "moreInfo": "Información adicional",
+  "selectOptions": {
+    "country": {
+      "ES": "España",
+      "DE": "Alemania", 
+      "AD": "Andorra",
+      "FR": "Francia",
+      "UK": "Reino Unido"
+    },
+    "province": {
+      "madrid": "Madrid",
+      "barcelona": "Barcelona",
+      "valencia": "Valencia",
+      "sevilla": "Sevilla",
+      "caceres": "Caceres",
+      "jaen": "Jaen",
+      "malaga": "Málaga",
+      "cadiz": "Cádiz"
+    }
+  },
+  "msg": {
+    "required": "Este campo es requerido",
+    "addressSaved": "Dirección guardada",
+    "countryRequired": "El campo País es obligatorio",
+    "addressRequired": "El campo Dirección es obligatorio",
+    "postalCodeRequired": "El campo Código postal es obligatorio",
+    "cityRequired": "El campo Ciudad es obligatorio",
+    "provinceRequired": "El campo Provincia es obligatorio"
+  },
+  "buttons": {
+    "save": "Añadir dirección",
+    "saving": "Añadiendo dirección...",
+    "saved": "Dirección añadida"
+  }
+}
