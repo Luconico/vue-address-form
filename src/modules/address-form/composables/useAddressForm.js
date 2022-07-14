@@ -1,15 +1,15 @@
 import { computed, onMounted, ref, watch } from 'vue';
-import { useStore } from 'vuex'
+// import { useStore } from 'vuex'
 
 const useAddressForm = () => {
 
-  const store = useStore()
+  const store = window.store
   const country = ref('')
   const addressForm = computed(() => store.getters['addressForm/form'])
 
   // TODO: GET EXISTING ADDRESS TO EDIT (IF ANY) AND SET IT
   onMounted(() => {
-    store.dispatch('addressForm/getCountrySelect', window.location.pathname.split('/')[1])
+    window.store.dispatch('addressForm/getCountrySelect', window.location.pathname.split('/')[1])
   })
 
   watch(country, (currentValue) => {
