@@ -43,6 +43,5 @@ export default () => ({
         messages: []
     },
     selectOptions: [],
-    buttonText: 'save',
     fetching: false,
 })

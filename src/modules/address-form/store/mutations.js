@@ -19,15 +19,12 @@ export const setFetching = ( state, { fetching }) => {
 }
 
 export const setSaving = ( state, { saving }) => {
-    state.buttonText = saving ? 'saving' : 'save'
     state.addressForm.saving = saving
 }
 
 export const setSubmited = ( state ) => {
     state.addressForm.saving = false
     state.addressForm.submited = true
-    state.buttonText = 'saved'
-    state.addressForm.messages = [{ msgType: "success", value: "msg.addressSaved" }]
 }
 
 export const checkErrors = ( state ) => {

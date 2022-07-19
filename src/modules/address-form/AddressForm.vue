@@ -29,14 +29,6 @@
         :customClass="{ 'custom-form-group': true, '--error': field.error }"
       />
     </template>
-    <button
-      class="btn btn-secondary"
-      :disabled="country.length < 1 || isDisabled"
-    >
-      <LoaderSpinner v-if="isFetching" color="gray" size="1rem" />{{
-        $t(`buttons.${buttonText}`)
-      }}
-    </button>
   </form>
 </template>
 
@@ -44,23 +36,20 @@
 import AlertMessage from "@/shared/alert-message/AlertMessage.vue";
 import InputBuilder from "@/shared/forms/input-builder/InputBuilder.vue";
 import useAddressForm from "./composables/useAddressForm";
-import LoaderSpinner from "@/shared/loader-spinner/LoaderSpinner.vue";
 
 export default {
   name: "address-form",
   components: {
     AlertMessage,
     InputBuilder,
-    LoaderSpinner,
   },
   setup() {
-    const { country, addressForm, isDisabled, isFetching, buttonText, onSubmit, selectOptions, } = useAddressForm();
+    const { country, addressForm, isDisabled, isFetching, onSubmit, selectOptions, } = useAddressForm();
     return {
       country,
       isDisabled,
       isFetching,
       addressForm,
-      buttonText,
       onSubmit,
       selectOptions,
     };

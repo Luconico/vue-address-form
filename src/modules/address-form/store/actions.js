@@ -191,9 +191,5 @@ export const saveAddressForm = async ({ commit, state }) => {
     commit('checkErrors')
     if (state.addressForm.messages.length > 0) return
     commit('setSaving', { saving: true })
-    // TODO: REQUEST FOR SAVE ADDRESS FORM
-    const isSaved = true
-    setTimeout(() => {
-        if (isSaved) commit('setSubmited')
-    }, 2000)
+    commit('setSubmited')
 }
