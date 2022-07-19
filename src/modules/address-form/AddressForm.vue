@@ -42,7 +42,7 @@
 
 <script>
 import AlertMessage from "@/shared/alert-message/AlertMessage.vue";
-import InputBuilder from "@/shared/input-builder/InputBuilder.vue";
+import InputBuilder from "@/shared/forms/input-builder/InputBuilder.vue";
 import useAddressForm from "./composables/useAddressForm";
 import LoaderSpinner from "@/shared/loader-spinner/LoaderSpinner.vue";
 
