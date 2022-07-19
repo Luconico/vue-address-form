@@ -1,50 +1,47 @@
 <template>
-  <h2>Hi {{ $t("address") }}</h2>
-
-  <AlertMessage
-    v-for="(message, key) in addressForm.messages"
-    :key="key"
-    :message="message"
+  <InputBuilder
+    type="select"
+    :label="$t('country')"
+    :required="true"
+    v-model="country"
+    :disabled="isDisabled"
+    :options="selectOptions['country'] ? selectOptions['country'].value : null"
+    :customClass="{ 'custom-form-group': true }"
   />
-
-  <form id="address-form" class="custom-form" @submit.prevent="onSubmit">
+  <template v-for="(field, index) in addressForm.fields" :key="index">
     <InputBuilder
-      type="select"
-      :label="$t('country')"
-      :required="true"
-      v-model="country"
-      :disabled="isDisabled"
-      :options="selectOptions['country'] ? selectOptions['country'].value : null"
-      :customClass="{ 'custom-form-group': true }"
+      v-if="field.needed"
+      :type="field.type"
+      :disabled="country.length < 1 || isDisabled"
+      :label="$t(index)"
+      :required="field.require"
+      v-model="field.value"
+      :options="selectOptions[index] ? selectOptions[index].value : null"
+      :customClass="{ 'custom-form-group': true, '--error': field.error }"
     />
-    <template v-for="(field, index) in addressForm.fields" :key="index">
-      <InputBuilder
-        v-if="field.needed"
-        :type="field.type"
-        :disabled="country.length < 1 || isDisabled"
-        :label="$t(index)"
-        :required="field.require"
-        v-model="field.value"
-        :options="selectOptions[index] ? selectOptions[index].value : null"
-        :customClass="{ 'custom-form-group': true, '--error': field.error }"
-      />
-    </template>
-  </form>
+  </template>
 </template>
 
 <script>
-import AlertMessage from "@/shared/alert-message/AlertMessage.vue";
 import InputBuilder from "@/shared/forms/input-builder/InputBuilder.vue";
 import useAddressForm from "./composables/useAddressForm";
 
 export default {
   name: "address-form",
   components: {
-    AlertMessage,
     InputBuilder,
   },
-  setup() {
-    const { country, addressForm, isDisabled, isFetching, onSubmit, selectOptions, } = useAddressForm();
+  setup(props, { emit }) {
+
+    const {
+      country,
+      addressForm,
+      isDisabled,
+      isFetching,
+      onSubmit,
+      selectOptions,
+    } = useAddressForm(emit);
+
     return {
       country,
       isDisabled,
@@ -58,16 +55,5 @@ export default {
 </script>
 
 <style>
-.custom-form .custom-form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
 
-.custom-form .custom-form-group.--error > input,
-.custom-form .custom-form-group.--error > select,
-.custom-form .custom-form-group.--error > textarea {
-  border: 1px solid red;
-  box-shadow: 0px 0px 5px 0px rgb(255 0 0);
-}
 </style>

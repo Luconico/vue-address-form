@@ -1,7 +1,7 @@
 import { computed, onMounted, ref, watch } from 'vue';
 import { useStore } from 'vuex'
 
-const useAddressForm = () => {
+const useAddressForm = (emit) => {
 
   const store = useStore()
   const country = ref('')
@@ -17,6 +17,7 @@ const useAddressForm = () => {
     store.dispatch('addressForm/getProvinceSelect', currentValue)
   });
 
+
   return {
     country,
     addressForm,
@@ -26,7 +27,10 @@ const useAddressForm = () => {
       country: computed(() => store.getters['addressForm/selectOptions']('country')),
       province: computed(() => store.getters['addressForm/selectOptions']('province'))
     },
-    onSubmit: () => { store.dispatch('addressForm/saveAddressForm') },
+    onSubmit: () => {
+      store.dispatch('addressForm/submit')
+      emit('onSubmit', addressForm.value)
+    },
   };
 
 }

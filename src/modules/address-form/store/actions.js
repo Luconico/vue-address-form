@@ -187,7 +187,7 @@ export const getAddressForm = async ({ commit }, country) => {
 }
 
 
-export const saveAddressForm = async ({ commit, state }) => {
+export const submit = async ({ commit, state }) => {
     commit('checkErrors')
     if (state.addressForm.messages.length > 0) return
     commit('setSaving', { saving: true })
