@@ -1,3 +1,4 @@
+import getCleanFormValues from '@/helpers/forms/getCleanFormValues'
 
 
 export const setSelectOptions = ( state, { newSelect }) => {
@@ -22,9 +23,23 @@ export const setSaving = ( state, { saving }) => {
     state.addressForm.saving = saving
 }
 
+export const setCountry = ( state, { country }) => {
+    state.country = country
+}
+
 export const setSubmited = ( state ) => {
     state.addressForm.saving = false
     state.addressForm.submited = true
+}
+
+export const setFormValues = ( state ) => {
+    state.formValues = {
+        fields: {
+            country: state.country,
+            ...getCleanFormValues(state.addressForm.fields)
+        },
+        messages: [...state.addressForm.messages]
+    }
 }
 
 export const checkErrors = ( state ) => {

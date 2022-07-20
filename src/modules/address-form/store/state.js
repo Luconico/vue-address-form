@@ -1,5 +1,6 @@
 
 export default () => ({
+    country: '',
     addressForm: {
         saving: false,
         submited: false,
@@ -44,4 +45,8 @@ export default () => ({
     },
     selectOptions: [],
     fetching: false,
+    formValues: {
+        fields: {},
+        messages:[]
+    },
 })

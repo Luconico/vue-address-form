@@ -2,16 +2,17 @@
   <FormBuilder :customClass="{'custom-form': true}" :messages="messages">
     <template v-slot:inputs>
       <AddressForm />
-      <ButtonBuilder type="submit" :customClass="{'btn btn-secondary': true}" />
+      <ButtonBuilder v-on:click="submit" :customClass="{'btn btn-secondary': true}" />
     </template>
   </FormBuilder>
 </template>
 
 <script>
-import { ref } from "vue";
+import {  ref } from "vue";
 import FormBuilder from "@/shared/forms/form-builder/FormBuilder.vue";
 import AddressForm from "@/modules/address-form/AddressForm.vue";
 import ButtonBuilder from "@/shared/buttons/ButtonBuilder.vue";
+import { useStore } from 'vuex';
 
 export default {
   name: "address-form",
@@ -21,11 +22,16 @@ export default {
     ButtonBuilder
   },
   setup() {
+    const store = useStore();
     const messages = ref([]);
+    // const formValues = ref({});
     return {
       messages,
-      submit() {
-        console.log("submit");
+      submit: () => {
+        store.dispatch('addressForm/submit')
+        const addressForm =  store.getters['addressForm/formValues']
+          console.log(addressForm)
+        // messages.value = [...addressForm.value.messages]
       }
     };
   },

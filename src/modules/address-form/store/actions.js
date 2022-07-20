@@ -189,7 +189,12 @@ export const getAddressForm = async ({ commit }, country) => {
 
 export const submit = async ({ commit, state }) => {
     commit('checkErrors')
+    commit('setFormValues')
     if (state.addressForm.messages.length > 0) return
     commit('setSaving', { saving: true })
     commit('setSubmited')
+}
+
+export const setCountry = async ({ commit }, country) => {
+    commit('setCountry', {country})
 }

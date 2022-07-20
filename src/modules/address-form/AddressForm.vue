@@ -33,23 +33,21 @@ export default {
   components: {
     InputBuilder,
   },
-  setup(props, { emit }) {
+  setup() {
 
     const {
       country,
       addressForm,
       isDisabled,
       isFetching,
-      onSubmit,
       selectOptions,
-    } = useAddressForm(emit);
+    } = useAddressForm();
 
     return {
       country,
       isDisabled,
       isFetching,
       addressForm,
-      onSubmit,
       selectOptions,
     };
   },

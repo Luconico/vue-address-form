@@ -1,6 +1,6 @@
 <template>
   <AlertMessages v-if="messages.length > 0" :messages="messages" />
-  <form :id="customId" :class="customClass" @submit.prevent="onSubmit">
+  <form :id="customId" :class="customClass" @submit.prevent="null">
     <slot name="inputs" />
   </form>
 </template>
@@ -25,12 +25,7 @@ export default {
       type: Object,
       default: () => ({}),
     },
-  },
-  setup: () => {
-    return {
-      onSubmit: () => { },
-    };
-  },
+  }
 };
 </script>
 
