@@ -1,7 +1,8 @@
 <template>
-  <FormBuilder :customClass="'custom-form'" :messages="messages">
+  <FormBuilder :customClass="{'custom-form': true}" :messages="messages">
     <template v-slot:inputs>
       <AddressForm />
+      <ButtonBuilder type="submit" :customClass="{'btn btn-secondary': true}" />
     </template>
   </FormBuilder>
 </template>
@@ -10,17 +11,22 @@
 import { ref } from "vue";
 import FormBuilder from "@/shared/forms/form-builder/FormBuilder.vue";
 import AddressForm from "@/modules/address-form/AddressForm.vue";
+import ButtonBuilder from "@/shared/buttons/ButtonBuilder.vue";
 
 export default {
   name: "address-form",
   components: {
     FormBuilder,
     AddressForm,
+    ButtonBuilder
   },
   setup() {
     const messages = ref([]);
     return {
       messages,
+      submit() {
+        console.log("submit");
+      }
     };
   },
 };

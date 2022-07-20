@@ -5,6 +5,7 @@
     :required="true"
     v-model="country"
     :disabled="isDisabled"
+    :name="'country'"
     :options="selectOptions['country'] ? selectOptions['country'].value : null"
     :customClass="{ 'custom-form-group': true }"
   />
@@ -16,6 +17,7 @@
       :label="$t(index)"
       :required="field.require"
       v-model="field.value"
+      :name="index"
       :options="selectOptions[index] ? selectOptions[index].value : null"
       :customClass="{ 'custom-form-group': true, '--error': field.error }"
     />

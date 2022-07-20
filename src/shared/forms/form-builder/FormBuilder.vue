@@ -19,12 +19,17 @@ export default {
     },
     customId: {
       type: String,
-      default: "",
+      default: "form",
     },
     customClass: {
       type: Object,
       default: () => ({}),
     },
+  },
+  setup: () => {
+    return {
+      onSubmit: () => { },
+    };
   },
 };
 </script>

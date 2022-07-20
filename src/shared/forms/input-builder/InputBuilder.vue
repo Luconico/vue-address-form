@@ -5,7 +5,7 @@
         >{{ label }}
         <span :title="$t('msg.required')" v-if="required">*</span></span
       >
-      <input :type="type" :value="modelValue" @input="updateValue" :disabled="disabled" />
+      <input :name="name" :type="type" :value="modelValue" @input="updateValue" :disabled="disabled" />
     </div>
   </template>
 
@@ -15,7 +15,7 @@
         >{{ label }} 
         <span :title="$t('msg.required')" v-if="required">*</span><LoaderSpinner v-if="!options" color="gray" size="1rem" /></span
       >
-      <select :value="modelValue" @input="updateValue" :disabled="disabled">
+      <select :name="name" :value="modelValue" @input="updateValue" :disabled="disabled">
         <option v-if="!options" ></option>
         <template v-if="options">
           <option
@@ -36,7 +36,7 @@
         >{{ label }}
         <span :title="$t('msg.required')" v-if="required">*</span></span
       >
-      <textarea :type="type" :value="modelValue" @input="updateValue" :disabled="disabled" />
+      <textarea :name="name" :type="type" :value="modelValue" @input="updateValue" :disabled="disabled" />
     </div>
   </template>
 </template>
