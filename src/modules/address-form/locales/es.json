@@ -1,4 +1,6 @@
 {
+  "companyName": "Empresa",
+  "cif": "DNI o CIF", 
   "country": "País",
   "address": "Dirección",
   "postalCode": "Código postal",
@@ -31,7 +33,9 @@
     "addressRequired": "El campo Dirección es obligatorio",
     "postalCodeRequired": "El campo Código postal es obligatorio",
     "cityRequired": "El campo Ciudad es obligatorio",
-    "provinceRequired": "El campo Provincia es obligatorio"
+    "provinceRequired": "El campo Provincia es obligatorio",
+    "companyNameRequired": "El campo Empresa es obligatorio",
+    "cifRequired": "El campo DNI o CIF es obligatorio"
   },
   "buttons": {
     "save": "Añadir dirección",

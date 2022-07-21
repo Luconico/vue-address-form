@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AlertMessages from "@/shared/alert-message/AlertMessage.vue";
+import AlertMessages from "@/shared/alert-message/AlertMessages.vue";
 export default {
   name: "form-builder",
   components: {

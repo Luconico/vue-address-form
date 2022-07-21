@@ -1,5 +1,5 @@
 <template>
-    <AlertMessage
+  <AlertMessage
     v-for="(message, key) in messages"
     :key="key"
     :message="message"
@@ -10,18 +10,17 @@
 import AlertMessage from "./AlertMessage.vue";
 export default {
   name: "alert-messages",
-    components: {
-    AlertMessage
+  components: {
+    AlertMessage,
   },
   props: {
     messages: {
-        type: Array,
-        default: []
+      type: Array,
+      default: () => [],
     },
   },
-}
+};
 </script>
 
 <style>
-
 </style>
