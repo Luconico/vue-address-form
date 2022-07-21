@@ -1,0 +1,15 @@
+{
+  "companyName": "Empresa",
+  "cif": "DNI o CIF", 
+  "selectOptions": {
+
+  },
+  "msg": {
+    "required": "Este campo es requerido",
+    "companyNameRequired": "El campo Empresa es obligatorio",
+    "cifRequired": "El campo DNI o CIF es obligatorio"
+  },
+  "buttons": {
+
+  }
+}
