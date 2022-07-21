@@ -1,38 +1,42 @@
 <template>
-  <FormBuilder :customClass="{'custom-form': true}" :messages="messages">
+  <FormBuilder :customClass="{ 'custom-form': true }" :messages="messages">
     <template v-slot:inputs>
       <AddressForm />
-      <ButtonBuilder v-on:click="submit" :customClass="{'btn btn-secondary': true}" />
+      <ButtonBuilder
+        v-on:click="submit"
+        :customClass="{ 'btn btn-secondary': true }"
+      />
     </template>
   </FormBuilder>
 </template>
 
 <script>
-import {  ref } from "vue";
+import { computed, ref } from "vue";
 import FormBuilder from "@/shared/forms/form-builder/FormBuilder.vue";
 import AddressForm from "@/modules/address-form/AddressForm.vue";
 import ButtonBuilder from "@/shared/buttons/ButtonBuilder.vue";
-import { useStore } from 'vuex';
+import { useStore } from "vuex";
 
 export default {
   name: "address-form",
   components: {
     FormBuilder,
     AddressForm,
-    ButtonBuilder
+    ButtonBuilder,
   },
   setup() {
     const store = useStore();
     const messages = ref([]);
-    // const formValues = ref({});
+    const formValues = ref({});
+    const addressForm = computed(() => store.getters["addressForm/formValues"]);
     return {
       messages,
       submit: () => {
-        store.dispatch('addressForm/submit')
-        const addressForm =  store.getters['addressForm/formValues']
-          console.log(addressForm)
-        // messages.value = [...addressForm.value.messages]
-      }
+        store.dispatch("addressForm/submit");
+        formValues.value = { ...addressForm.value.fields };
+        console.log(formValues.value);
+        console.log([...addressForm.value.messages]);
+      },
     };
   },
 };

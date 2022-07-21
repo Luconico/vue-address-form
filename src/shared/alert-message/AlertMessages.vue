@@ -2,7 +2,7 @@
     <AlertMessage
     v-for="(message, key) in messages"
     :key="key"
-    :message="$t(message)"
+    :message="message"
   />
 </template>
 
