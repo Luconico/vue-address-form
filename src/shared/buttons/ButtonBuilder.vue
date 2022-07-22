@@ -2,7 +2,7 @@
       <button
         :type="type"
         :class="customClass"
-        :disabled="disabled"
+        :disabled="disabled || isFetching"
     >
       <LoaderSpinner v-if="isFetching" color="gray" size="1rem" />{{  buttonText  }}
     </button>

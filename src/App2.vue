@@ -4,6 +4,7 @@
       <AddressForm />
       <ButtonBuilder
         v-on:click="submit"
+        :isFetching="isFetching"
         :customClass="{ 'btn btn-secondary': true }"
       />
     </template>
@@ -28,30 +29,35 @@ export default {
     const store = useStore();
     const messages = ref([]);
     const formValues = ref({});
-
     const addressForm = computed(() => store.getters["addressForm/formValues"]);
+
+    const isFetching = ref(false);
 
     return {
       messages,
+      isFetching,
       submit: () => {
         store.dispatch("addressForm/submit");
 
         messages.value = [...addressForm.value.messages];
-
         if (messages.value.length > 0) return;
 
         formValues.value = {
           ...addressForm.value.fields,
         };
 
-        messages.value = [
-          {
-            msgType: "success",
-            value: "Form submitted",
-          },
-        ];
-
-        console.log(formValues.value);
+        // TODO: submit form to server
+        isFetching.value = true;
+        setTimeout(() => {
+          isFetching.value = false;
+          messages.value = [
+            {
+              msgType: "success",
+              value: "Form submitted",
+            },
+          ];
+          console.log(formValues.value);
+        }, 1000);
       },
     };
   },
