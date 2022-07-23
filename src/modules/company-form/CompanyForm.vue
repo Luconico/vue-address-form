@@ -18,7 +18,7 @@ import InputBuilder from "@/shared/forms/input-builder/InputBuilder.vue";
 import useCompanyForm from "./composables/useCompanyForm";
 
 export default {
-  name: "company-form",
+  name: "CompanyForm",
   components: {
     InputBuilder,
   },

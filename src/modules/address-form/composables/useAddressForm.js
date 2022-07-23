@@ -1,4 +1,5 @@
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeMount, onMounted, ref, watch } from 'vue';
+import addressFormModule from '../store';
 import { useStore } from 'vuex'
 
 const useAddressForm = () => {
@@ -6,6 +7,10 @@ const useAddressForm = () => {
   const store = useStore()
   const country = ref('')
   const addressForm = computed(() => store.getters['addressForm/form'])
+
+  onBeforeMount(() => {
+    store.registerModule("addressForm", addressFormModule);
+  })
 
   // TODO: GET EXISTING ADDRESS TO EDIT (IF ANY) AND SET IT
   onMounted(() => {

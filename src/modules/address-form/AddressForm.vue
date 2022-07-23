@@ -29,7 +29,7 @@ import InputBuilder from "@/shared/forms/input-builder/InputBuilder.vue";
 import useAddressForm from "./composables/useAddressForm";
 
 export default {
-  name: "address-form",
+  name: "AddressForm",
   components: {
     InputBuilder,
   },

@@ -11,7 +11,7 @@
 <script>
 import LoaderSpinner from "@/shared/loader-spinner/LoaderSpinner.vue";
 export default {
-    name: "button-builder",
+    name: "ButtonBuilder",
     components: {
         LoaderSpinner
     },
