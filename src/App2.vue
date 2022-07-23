@@ -1,13 +1,11 @@
 <template>
   <FormBuilder :customClass="{ 'custom-form': true }" :messages="messages">
-    <template v-slot:inputs>
-      <AddressForm />
-      <ButtonBuilder
-        v-on:click="submit"
-        :isFetching="isFetching"
-        :customClass="{ 'btn btn-secondary': true }"
-      />
-    </template>
+    <AddressForm />
+    <ButtonBuilder
+      v-on:click="submit"
+      :isFetching="isFetching"
+      :customClass="{ 'btn btn-secondary': true }"
+    />
   </FormBuilder>
 </template>
 

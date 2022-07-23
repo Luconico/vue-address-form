@@ -1,12 +1,13 @@
 <template>
   <AlertMessages v-if="messages.length > 0" :messages="messages" />
   <form :id="customId" :class="customClass" @submit.prevent="null">
-    <slot name="inputs" />
+    <slot />
   </form>
 </template>
 
 <script>
 import AlertMessages from "@/shared/alert-message/AlertMessages.vue";
+import { onMounted } from "@vue/runtime-core";
 export default {
   name: "form-builder",
   components: {
@@ -25,7 +26,13 @@ export default {
       type: Object,
       default: () => ({}),
     },
-  }
+  },
+  setup(props, {slots}) {
+
+    onMounted(() => {
+      console.log({ slots: slots.default() });
+    });
+  },
 };
 </script>
 
