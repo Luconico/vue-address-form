@@ -43,7 +43,7 @@ export const checkErrors = ( state ) => {
     const { fields, messages } = state.companyForm
     Object.keys(fields).forEach(key => {
         fields[key].error = false
-        if (fields[key].require && fields[key].needed && fields[key].value === '') {
+        if (fields[key].required && fields[key].active && fields[key].value === '') {
             fields[key].error = true
             messages.push({ msgType: "error", value: `msg.${key}Required` })
         }

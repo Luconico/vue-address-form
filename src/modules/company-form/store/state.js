@@ -6,15 +6,15 @@ export default () => ({
         fields: {
             companyName: {
                 value: '',
-                require: true,
-                needed: true,
+                required: true,
+                active: true,
                 error: false,
                 type: 'text',
             },
             cif: {
                 value: '',
-                require: true,
-                needed: true,
+                required: true,
+                active: true,
                 error: false,
                 type: 'text',
             }

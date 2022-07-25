@@ -56,36 +56,36 @@ export const getAddressForm = async ({ commit }, country) => {
             fields: {
                 address: {
                     value: '',
-                    require: true,
-                    needed: true,
+                    required: true,
+                    active: true,
                     error: false,
                     type: 'text',
                 },
                 postalCode: {
                     value: '',
-                    require: true,
-                    needed: true,
+                    required: true,
+                    active: true,
                     error: false,
                     type: 'text'
                 },
                 city: {
                     value: '',
-                    require: false,
-                    needed: true,
+                    required: false,
+                    active: true,
                     error: false,
                     type: 'text'
                 },
                 province: {
                     value: '',
-                    require: true,
-                    needed: true,
+                    required: true,
+                    active: true,
                     error: false,
                     type: 'select'
                 },
                 moreInfo: {
                     value: '',
-                    require: false,
-                    needed: true,
+                    required: false,
+                    active: true,
                     error: false,
                     type: 'textarea'
                 },
@@ -98,36 +98,36 @@ export const getAddressForm = async ({ commit }, country) => {
             fields: {
                 address: {
                     value: '',
-                    require: true,
-                    needed: true,
+                    required: true,
+                    active: true,
                     error: false,
                     type: 'text',
                 },
                 postalCode: {
                     value: '',
-                    require: true,
-                    needed: true,
+                    required: true,
+                    active: true,
                     error: false,
                     type: 'text'
                 },
                 city: {
                     value: '',
-                    require: false,
-                    needed: false,
+                    required: false,
+                    active: false,
                     error: false,
                     type: 'text'
                 },
                 province: {
                     value: '',
-                    require: false,
-                    needed: false,
+                    required: false,
+                    active: false,
                     error: false,
                     type: 'select'
                 },
                 moreInfo: {
                     value: '',
-                    require: false,
-                    needed: true,
+                    required: false,
+                    active: true,
                     error: false,
                     type: 'textarea'
                 },
@@ -140,36 +140,36 @@ export const getAddressForm = async ({ commit }, country) => {
             fields: {
                 address: {
                     value: '',
-                    require: true,
-                    needed: true,
+                    required: true,
+                    active: true,
                     error: false,
                     type: 'text',
                 },
                 postalCode: {
                     value: '',
-                    require: true,
-                    needed: true,
+                    required: true,
+                    active: true,
                     error: false,
                     type: 'text'
                 },
                 city: {
                     value: '',
-                    require: true,
-                    needed: true,
+                    required: true,
+                    active: true,
                     error: false,
                     type: 'text'
                 },
                 province: {
                     value: '',
-                    require: false,
-                    needed: false,
+                    required: false,
+                    active: false,
                     error: false,
                     type: 'select'
                 },
                 moreInfo: {
                     value: '',
-                    require: false,
-                    needed: true,
+                    required: false,
+                    active: true,
                     error: false,
                     type: 'textarea'
                 },

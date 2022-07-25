@@ -11,11 +11,11 @@
   />
   <template v-for="(field, index) in addressForm.fields" :key="index">
     <InputBuilder
-      v-if="field.needed"
+      v-if="field.active"
       :type="field.type"
-      :disabled="country.length < 1 || isDisabled"
+      :disabled="isDisabled"
       :label="$t(index)"
-      :required="field.require"
+      :required="field.required"
       v-model="field.value"
       :name="index"
       :options="selectOptions[index] ? selectOptions[index].value : null"
