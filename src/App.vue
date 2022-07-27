@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import FormBuilder from "@/shared/forms/form-builder/FormBuilder.vue";
+import FormBuilder from "@/modules/forms/form-builder/FormBuilder.vue";
 import ButtonBuilder from "@/shared/buttons/ButtonBuilder.vue";
-import AddressForm from "@/modules/address-form/AddressForm.vue";
-import CompanyForm from '@/modules/company-form/CompanyForm.vue';
+import AddressForm from "@/modules/forms/form-modules/address-form/AddressForm.vue";
+import CompanyForm from '@/modules/forms/form-modules/company-form/CompanyForm.vue';
 
 export default {
   name: "address-form",

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import InputBuilder from "@/shared/forms/input-builder/InputBuilder.vue";
+import InputBuilder from "@/modules/forms/input-builder/InputBuilder.vue";
 import useCompanyForm from "./composables/useCompanyForm";
 
 export default {

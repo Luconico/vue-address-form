@@ -57,8 +57,10 @@ export default {
           messages.value = [...messages.value, ...moduleValues.messages];
           formValues.value = { ...formValues.value, ...moduleValues.fields };
         });
-        console.log(formValues.value);
+
         if (messages.value.length > 0) return;
+
+        
       },
     };
   },

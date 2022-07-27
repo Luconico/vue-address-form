@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import i18n from '@/modules/address-form/locales/i18n'
+import i18n from '@/shared/locales/i18n'
 import store from './store'
 
 
