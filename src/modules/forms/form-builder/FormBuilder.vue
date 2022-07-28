@@ -54,7 +54,6 @@ export default {
         presentModules.value.map((module) => {
           store.dispatch(`${module}Form/submit`);
           const moduleValues = store.getters[`${module}Form/formValues`];
-          console.log(moduleValues);
           messages.value = [...messages.value, ...moduleValues.messages];
           formValues.value = { ...formValues.value, ...moduleValues.fields };
         });

@@ -1,22 +1,15 @@
 
 export default () => ({
-    companyForm: {
+    countryForm: {
         saving: false,
         submited: false,
         fields: {
-            companyName: {
+            country: {
                 value: '',
                 required: true,
                 active: true,
                 error: false,
-                type: 'text',
-            },
-            cif: {
-                value: '',
-                required: true,
-                active: true,
-                error: false,
-                type: 'text',
+                type: 'select'
             }
         },
         messages: []

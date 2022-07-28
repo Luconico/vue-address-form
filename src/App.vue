@@ -14,6 +14,8 @@ import FormBuilder from "@/modules/forms/form-builder/FormBuilder.vue";
 import ButtonBuilder from "@/shared/buttons/ButtonBuilder.vue";
 import AddressForm from "@/modules/forms/form-modules/address-form/AddressForm.vue";
 import CompanyForm from '@/modules/forms/form-modules/company-form/CompanyForm.vue';
+import { ref } from '@vue/reactivity';
+import { LOCATION } from './static';
 
 export default {
   name: "address-form",
@@ -22,7 +24,14 @@ export default {
     AddressForm,
     CompanyForm,
     ButtonBuilder,
-  }
+  },
+  setup() {
+    const location = ref(LOCATION)
+    return {
+      location,
+      setLocation: (value) => location.value = value,
+    };
+  },
 };
 </script>
 

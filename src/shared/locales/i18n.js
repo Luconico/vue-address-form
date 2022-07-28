@@ -6,11 +6,12 @@ import * as en from './en.json';
 import * as it from './it.json';
 import * as pt from './pt.json';
 import * as fr from './fr.json';
+import { LOCATION } from '@/static';
 
 const i18n = createI18n({
   datetimeFormats,
   numberFormats,
-  locale: window.location.pathname.split('/')[1],
+  locale: LOCATION,
   messages: {
     es: { ...es },
     en: { ...en },

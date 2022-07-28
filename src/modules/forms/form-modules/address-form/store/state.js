@@ -43,7 +43,7 @@ export default () => ({
         },
         messages: []
     },
-    selectOptions: [],
+    selectOptions: [{}],
     fetching: false,
     formValues: {
         fields: {},
