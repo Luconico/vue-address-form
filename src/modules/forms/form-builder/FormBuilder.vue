@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import { ref } from "vue";
 import AlertMessages from "@/shared/alert-message/AlertMessages.vue";
-import { onMounted } from "@vue/runtime-core";
+import { computed, onBeforeMount } from "vue";
 import { useStore } from "vuex";
+import formBuilderModule from "./store";
 export default {
   name: "FormBuilder",
   components: {
@@ -24,43 +24,32 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    successMsg: {
+      type: String,
+      default: "Form submited ",
+    },
   },
-  setup(props, { slots }) {
+  setup(props) {
     const store = useStore();
-    const messages = ref([]);
-    const formValues = ref({});
 
-    const presentModules = ref([]);
-
-    const registerFormModules = () => {
-      slots.default().map((slot) => {
-        if (slot.type.name.includes("Form"))
-          presentModules.value.push(
-            slot.type.name.toLowerCase().replace("form", "")
-          );
-      });
-    };
-
-    onMounted(() => {
-      registerFormModules();
-    });
+    onBeforeMount(() => store.registerModule("formBuilder", formBuilderModule));
 
     return {
-      messages,
+      messages: computed(() => store.getters["formBuilder/messages"]),
       onSumbit: () => {
-        messages.value = [];
-        formValues.value = {};
-
-        presentModules.value.map((module) => {
-          store.dispatch(`${module}Form/submit`);
-          const moduleValues = store.getters[`${module}Form/formValues`];
-          messages.value = [...messages.value, ...moduleValues.messages];
-          formValues.value = { ...formValues.value, ...moduleValues.fields };
-        });
-
-        if (messages.value.length > 0) return;
-
-        
+        store.dispatch("formBuilder/reset");
+        store.dispatch("formBuilder/isSubmitting", true);
+        console.log(store.getters["formBuilder/isValid"])
+        if (!store.getters["formBuilder/isValid"]) return
+        // REQUEST
+        setTimeout(() => {
+          store.dispatch("formBuilder/isSubmitting", false);
+          store.dispatch("formBuilder/isSubmited", true);
+          store.dispatch("formBuilder/messages", [{
+            msgType: "success",
+            value: props.successMsg,
+          }]);
+        }, 2000);
       },
     };
   },

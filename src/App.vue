@@ -1,8 +1,9 @@
 <template>
   <FormBuilder :customClass="{ 'custom-form': true }">
     <CompanyForm />
-    <AddressForm />
     <ButtonBuilder
+      :disabled="isDisabled"
+      :isFetching="isSubmitting"
       :type="'submit'"
       :customClass="{ 'btn btn-secondary': true }"
     />
@@ -12,23 +13,26 @@
 <script>
 import FormBuilder from "@/modules/forms/form-builder/FormBuilder.vue";
 import ButtonBuilder from "@/shared/buttons/ButtonBuilder.vue";
-import AddressForm from "@/modules/forms/form-modules/address-form/AddressForm.vue";
 import CompanyForm from '@/modules/forms/form-modules/company-form/CompanyForm.vue';
 import { ref } from '@vue/reactivity';
-import { LOCATION } from './static';
+import { LOCATION } from './global';
+import { useStore } from 'vuex';
+import { computed } from '@vue/runtime-core';
 
 export default {
   name: "address-form",
   components: {
     FormBuilder,
-    AddressForm,
     CompanyForm,
     ButtonBuilder,
   },
   setup() {
     const location = ref(LOCATION)
+    const store = useStore()
     return {
       location,
+      isDisabled: computed(() => store.getters["formBuilder/isDisabled"]),
+      isSubmitting: computed(() => store.getters["formBuilder/isSubmitting"]),
       setLocation: (value) => location.value = value,
     };
   },
