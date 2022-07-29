@@ -29,7 +29,7 @@ export default {
       default: "Form submited ",
     },
   },
-  setup(props) {
+  setup(props, { slots }) {
     const store = useStore();
 
     onBeforeMount(() => store.registerModule("formBuilder", formBuilderModule));
@@ -39,16 +39,23 @@ export default {
       onSumbit: () => {
         store.dispatch("formBuilder/reset");
         store.dispatch("formBuilder/isSubmitting", true);
-        console.log(store.getters["formBuilder/isValid"])
-        if (!store.getters["formBuilder/isValid"]) return
+        console.log(store.getters["formBuilder/isValid"]);
+        slots.default().map((slot) => {
+          if (slot.type.name.includes("Form")) {
+            console.log(slot)
+          }
+        });
+        if (!store.getters["formBuilder/isValid"]) return;
         // REQUEST
         setTimeout(() => {
           store.dispatch("formBuilder/isSubmitting", false);
           store.dispatch("formBuilder/isSubmited", true);
-          store.dispatch("formBuilder/messages", [{
-            msgType: "success",
-            value: props.successMsg,
-          }]);
+          store.dispatch("formBuilder/messages", [
+            {
+              msgType: "success",
+              value: props.successMsg,
+            },
+          ]);
         }, 2000);
       },
     };

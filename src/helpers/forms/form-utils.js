@@ -5,7 +5,7 @@ export const getCleanFormValues = (fields) => {
     return formValues
 }
 
-export const checkValidations = (fields) => {
+export const checkErrorMessages = (fields) => {
     const messages = []
     Object.keys(fields).forEach((key) => {
         if (!fields[key].active) return

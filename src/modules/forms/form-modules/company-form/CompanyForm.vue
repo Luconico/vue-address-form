@@ -15,9 +15,9 @@
 
 <script>
 import InputBuilder from "@/modules/forms/input-builder/InputBuilder.vue";
-import { computed, ref, watch } from "vue";
+import { computed, ref, watch, defineExpose } from "vue";
 import { useStore } from "vuex";
-import { checkValidations } from "@/helpers/forms/form-utils";
+import { checkErrorMessages } from "@/helpers/forms/form-utils";
 
 export default {
   name: "CompanyForm",
@@ -47,14 +47,17 @@ export default {
     });
 
     const dummyMethod = () => {
-      console.log('hola')
+      console.log("hola");
     };
+    defineExpose({
+      dummyMethod
+    });
 
     watch(isSubmitting, (newValue) => {
       if (newValue) {
-        const messages = checkValidations(companyForm.value);
-        console.log(messages.length)
-        if (messages.length > 0) store.dispatch('formBuilder/isValid', false)
+        const messages = checkErrorMessages(companyForm.value);
+        console.log(messages.length);
+        if (messages.length > 0) store.dispatch("formBuilder/isValid", false);
         store.dispatch("formBuilder/messages", messages);
       }
     });
