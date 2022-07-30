@@ -7,7 +7,7 @@
     :disabled="isDisabled"
     :name="'country'"
     :options="selectOptions['country'] ? selectOptions['country'].value : null"
-    :customClass="{ 'custom-form-group': true }"
+    :customClass="[customClass]"
   />
   <template v-for="(field, index) in addressForm.fields" :key="index">
     <InputBuilder
@@ -19,7 +19,7 @@
       v-model="field.value"
       :name="index"
       :options="selectOptions[index] ? selectOptions[index].value : null"
-      :customClass="{ 'custom-form-group': true, '--error': field.error }"
+      :customClass="[customClass, {'--error': field.error}]"
     />
   </template>
 </template>
@@ -32,6 +32,12 @@ export default {
   name: "AddressForm",
   components: {
     InputBuilder,
+  },
+  props: {
+    customClass: {
+      type: String,
+      default: "",
+    },
   },
   setup() {
 

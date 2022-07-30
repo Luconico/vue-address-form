@@ -8,7 +8,7 @@
       :required="field.required"
       v-model="field.value"
       :name="index"
-      :customClass="{ 'custom-form-group': true, '--error': field.error }"
+      :customClass="[customClass, {'--error': field.error}]"
     />
   </template>
 </template>
@@ -21,6 +21,12 @@ export default {
   name: "CompanyForm",
   components: {
     InputBuilder,
+  },
+   props: {
+    customClass: {
+      type: String,
+      default: "",
+    },
   },
   setup() {
     const { companyForm, isDisabled, isFetching, selectOptions } = useCompanyForm();

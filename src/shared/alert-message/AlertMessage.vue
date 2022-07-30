@@ -6,8 +6,7 @@
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
-import { computed, onMounted, watch } from "@vue/runtime-core";
+import { computed } from "@vue/runtime-core";
 export default {
   name: "alert-message",
   props: {
@@ -23,26 +22,16 @@ export default {
     },
   },
   setup(props) {
-    const isSuccess = ref(true);
-
-    onMounted(() => {
-      if (props.message.msgType === "error") isSuccess.value = false;
-    });
-
-    watch(
-      () => props.message.msgType,
-      (newValue) =>
-        newValue === "error"
-          ? (isSuccess.value = false)
-          : (isSuccess.value = true)
-    );
-
     return {
       alertClass: computed(() =>
-        isSuccess.value ? "alert--success" : "alert--error"
+        props.message.msgType === "warning" ? "alert--warning" : 
+        props.message.msgType === "error" ? "alert--error" : 
+        "alert--success"
       ),
       inconClass: computed(() =>
-        isSuccess.value ? "fa fa-lg fa-check" : "fa fa-lg fa-ban"
+        props.message.msgType === "warning" ? "fa fa-lg fa-exclamation" : 
+        props.message.msgType === "error" ? "fa fa-lg fa-ban" : 
+        "fa fa-lg fa-check"
       ),
     };
   },

@@ -57,10 +57,8 @@ export default {
           messages.value = [...messages.value, ...moduleValues.messages];
           formValues.value = { ...formValues.value, ...moduleValues.fields };
         });
-
+        console.log(formValues.value);
         if (messages.value.length > 0) return;
-
-        
       },
     };
   },
@@ -68,4 +66,30 @@ export default {
 </script>
 
 <style>
+.autocomplete-container {
+  width: 100%;
+  position: relative;
+}
+.autocomplete-list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  z-index: 1;
+}
+
+.autocomplete-list > span {
+  padding: 5px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.autocomplete-list > span:hover {
+  background-color: #ccc;
+}
 </style>
