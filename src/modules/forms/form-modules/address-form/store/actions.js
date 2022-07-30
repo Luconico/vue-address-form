@@ -80,7 +80,7 @@ export const getAddressForm = async ({ commit }, country) => {
                     required: true,
                     active: true,
                     error: false,
-                    type: 'select'
+                    type: 'text'
                 },
                 moreInfo: {
                     value: '',

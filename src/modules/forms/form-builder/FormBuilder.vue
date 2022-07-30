@@ -66,11 +66,11 @@ export default {
 </script>
 
 <style>
-.autocomplete-container {
+.suggestions-container {
   width: 100%;
   position: relative;
 }
-.autocomplete-list {
+.suggestions-list {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -80,16 +80,19 @@ export default {
   background-color: #fff;
   border: 1px solid #ccc;
   border-top: none;
+  border-radius: 0 0 5px 5px;
+  box-shadow: inset 0px -1px 5px 0px #ccc;
+  overflow: hidden;
   z-index: 1;
 }
 
-.autocomplete-list > span {
+.suggestions-list > span {
   padding: 5px;
   cursor: pointer;
   text-align: left;
 }
 
-.autocomplete-list > span:hover {
+.suggestions-list > span:hover {
   background-color: #ccc;
 }
 </style>
