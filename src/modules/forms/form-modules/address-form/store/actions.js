@@ -37,6 +37,8 @@ export const getProvinceSelect = async ({ commit }, country) => {
                 { value: 'madrid' },
                 { value: 'barcelona' },
                 { value: 'malaga' },
+                { value: 'valencia' },
+                { value: 'sevilla' },
             ]
         }
     } // TODO: REQUEST FOR PROVINCES
