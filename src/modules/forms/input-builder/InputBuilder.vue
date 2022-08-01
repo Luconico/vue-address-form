@@ -25,6 +25,7 @@
           ></span>
         </div>
       </div>
+      
     </div>
   </template>
 
@@ -122,18 +123,29 @@ export default {
     const filteredValues = ref([]);
 
     watch(() => props.modelValue, (newValue) => {
+      handleSuggestions(newValue);
+      hadleValidations(newValue);
+    });
+
+    const handleSuggestions = (newValue) => {
       if (props.type !== 'text' || !props.options) return
       
       filteredValues.value = props.options.options.map(({value}) => value)
       .filter((word) => word.toLowerCase().includes(newValue.toLowerCase()))
 
-      if (filteredValues.value.join("").toString().toLowerCase() === newValue.toLowerCase()) return filteredValues.value = []
+      const isSameWord = (filteredValues.value.join("").toString().toLowerCase() === newValue.toLowerCase())
+      if (isSameWord) return filteredValues.value = []
   
       filteredValues.value = filteredValues.value
       .map((word) => props.options.translate ? t(`selectOptions.${props.options.select}.${word}`) : word)
       .map((word) => word.replace(RegExp(newValue, "gi"), (str) => "<b>" + str + "</b>"))
       .slice(0, 3).sort();
-    });
+    }
+
+    const hadleValidations = (newValue) => {
+      console.log(newValue)
+      return true
+    }
 
     return {
       filteredValues,
