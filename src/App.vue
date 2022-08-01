@@ -1,7 +1,7 @@
 <template>
   <FormBuilder :customClass="{ 'custom-form': true }">
-    <CompanyForm :customClass="'custom-form-group'" />
-    <AddressForm :customClass="'custom-form-group'" />
+    <CompanyForm :customClass="inputClass" />
+    <AddressForm :customClass="inputClass" />
     <ButtonBuilder
       :type="'submit'"
       :customClass="{ 'btn btn-secondary': true }"
@@ -28,7 +28,8 @@ export default {
   setup() {
     const location = ref(LOCATION)
     return {
-      location
+      location,
+      inputClass: 'custom-form-group'
     };
   },
 };

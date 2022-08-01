@@ -6,6 +6,7 @@ export const getCountrySelect = async ({ commit }, country) => {
     const countries = {
         ES: {
             select: 'country',
+            translate: true,
             options: [
                 { value: 'ES' },
                 { value: 'DE' },
@@ -14,6 +15,7 @@ export const getCountrySelect = async ({ commit }, country) => {
         },
         EN: {
             select: 'country',
+            translate: true,
             options: [
                 { value: 'UK' },
                 { value: 'DE' },
@@ -33,6 +35,7 @@ export const getProvinceSelect = async ({ commit }, country) => {
     const provinces = {
         ES: {
             select: 'province',
+            translate: true,
             options: [
                 { value: 'madrid' },
                 { value: 'barcelona' },

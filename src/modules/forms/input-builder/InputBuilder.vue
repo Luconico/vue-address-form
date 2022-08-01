@@ -47,7 +47,7 @@
             :key="value"
             :value="value"
           >
-            {{ $t(`selectOptions.${options.select}.${value}`) }}
+            {{ options.translate ? $t(`selectOptions.${options.select}.${value}`) : value }}
           </option>
         </template>
       </select>
@@ -124,23 +124,21 @@ export default {
     watch(() => props.modelValue, (newValue) => {
       if (props.type !== 'text' || !props.options) return
       
-      filteredValues.value = [...props.options.options.map(({value}) => value)]
+      filteredValues.value = props.options.options.map(({value}) => value)
       .filter((word) => word.toLowerCase().includes(newValue.toLowerCase()))
 
       if (filteredValues.value.join("").toString().toLowerCase() === newValue.toLowerCase()) return filteredValues.value = []
   
       filteredValues.value = filteredValues.value
-      .map((word) => t(`selectOptions.${props.options.select}.${word}`))
+      .map((word) => props.options.translate ? t(`selectOptions.${props.options.select}.${word}`) : word)
       .map((word) => word.replace(RegExp(newValue, "gi"), (str) => "<b>" + str + "</b>"))
-      .slice(0, 3);
+      .slice(0, 3).sort();
     });
 
     return {
       filteredValues,
       setFromSuggest: (value) => {
-        const suggested = value
-          .replace(RegExp("<b>", "g"), "")
-          .replace(RegExp("</b>", "g"), "");
+        const suggested = value.replace(RegExp("<b>", "g"), "").replace(RegExp("</b>", "g"), "");
         context.emit("update:modelValue", suggested);
       },
       updateValue: (event) => {
