@@ -11,12 +11,14 @@
         :type="type"
         :value="modelValue"
         @input="updateValue"
+        @focus="setFocus(true)"
+        @blur="setFocus(false)"
         :disabled="disabled"
       />
       <div class="suggestions-container">
         <div
           class="suggestions-list"
-          v-if="modelValue.length > 0 && filteredValues.length > 0"
+          v-if="modelValue.length > 0 && filteredValues.length > 0 && isFocus" 
         >
           <span
             v-for="value in filteredValues"
@@ -147,6 +149,8 @@ export default {
 
     const validationDebounce = ref(null);
 
+    const isFocus = ref(false);
+
     watch(() => props.modelValue, (newValue) => {
         handleSuggestions(newValue);
         hadleValidations(newValue);
@@ -183,6 +187,10 @@ export default {
       filteredValues,
       isValidating,
       errorMessage,
+      isFocus,
+      setFocus(value) {
+        isFocus.value = value;
+      },
       isError: computed(() => errorMessage.value && errorMessage.value.msgType === "error"),
       isWarning: computed(() => errorMessage.value && errorMessage.value.msgType === "warning"),
       updateValueFromSuggest: (value) => {
