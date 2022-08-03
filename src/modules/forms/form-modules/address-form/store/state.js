@@ -12,7 +12,7 @@ export default () => ({
             },
             postalCode: {
                 value: '',
-                validations: ['required'],
+                validations: ['required', 'minLength:5', 'maxLength:5'],
                 active: true,
                 valid: false,
                 type: 'text'

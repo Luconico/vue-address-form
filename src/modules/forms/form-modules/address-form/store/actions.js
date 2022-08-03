@@ -56,130 +56,121 @@ export const getAddressForm = async ({ commit }, country) => {
     commit('setFetching', { isFetching: true })
     const form = {
         ES: {
-            saving: false,
-            submited: false,
             fields: {
                 address: {
                     value: '',
                     validations: ['required'],
                     active: true,
-                    error: false,
+                    valid: false,
                     type: 'text',
                 },
                 postalCode: {
                     value: '',
                     validations: ['required', 'minLength:5', 'maxLength:5'],
                     active: true,
-                    error: false,
+                    valid: false,
                     type: 'text'
                 },
                 city: {
                     value: '',
                     validations: ['required'],
                     active: true,
-                    error: false,
+                    valid: false,
                     type: 'text'
                 },
                 province: {
                     value: '',
                     validations: ['required'],
                     active: true,
-                    error: false,
-                    type: 'text'
+                    valid: false,
+                    type: 'select'
                 },
                 moreInfo: {
                     value: '',
                     validations: [],
                     active: true,
-                    error: false,
+                    valid: false,
                     type: 'textarea'
                 },
-            },
-            messages: []
+            }
         },
         DE: {
-            saving: false,
-            submited: false,
             fields: {
                 address: {
                     value: '',
                     validations: ['required'],
                     active: true,
-                    error: false,
+                    valid: false,
                     type: 'text',
                 },
                 postalCode: {
                     value: '',
                     validations: ['required'],
                     active: true,
-                    error: false,
+                    valid: false,
                     type: 'text'
                 },
                 city: {
                     value: '',
                     validations: ['required'],
                     active: false,
-                    error: false,
+                    valid: false,
                     type: 'text'
                 },
                 province: {
                     value: '',
                     validations: [],
                     active: false,
-                    error: false,
+                    valid: false,
                     type: 'select'
                 },
                 moreInfo: {
                     value: '',
                     validations: [],
                     active: true,
-                    error: false,
+                    valid: false,
                     type: 'textarea'
                 },
-            },
-            messages: []
+            }
         },
         AD: {
-            saving: false,
-            submited: false,
             fields: {
                 address: {
                     value: '',
                     validations: ['required'],
                     active: true,
-                    error: false,
+                    valid: false,
                     type: 'text',
                 },
                 postalCode: {
                     value: '',
                     validations: ['required'],
                     active: true,
-                    error: false,
+                    valid: false,
                     type: 'text'
                 },
                 city: {
                     value: '',
                     validations: ['required'],
                     active: true,
-                    error: false,
+                    valid: false,
                     type: 'text'
                 },
                 province: {
                     value: '',
                     validations: ['required'],
                     active: false,
-                    error: false,
+                    valid: false,
                     type: 'select'
                 },
                 moreInfo: {
                     value: '',
                     validations: [],
                     active: true,
-                    error: false,
+                    valid: false,
                     type: 'textarea'
                 },
-            },
-            messages: []
+            }
         }
     }// TODO: REQUEST FOR FORM
     const addressForm = form[country]
