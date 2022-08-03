@@ -8,6 +8,7 @@
       :required="field.validations.includes('required')"
       v-model="field.value"
       :name="index"
+      :validations="field.validations"
       :customClass="[customClass, {'--error': field.error}]"
     />
   </template>
@@ -29,10 +30,9 @@ export default {
     },
   },
   setup() {
-    const { companyForm, isDisabled, isFetching, selectOptions } = useCompanyForm();
+    const { companyForm, isDisabled, selectOptions } = useCompanyForm();
     return {
       isDisabled,
-      isFetching,
       companyForm,
       selectOptions,
     };

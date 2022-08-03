@@ -28,6 +28,8 @@
   },
   "msg": {
     "required": "Este campo es requerido",
+    "minLength": "Este campo debe tener al menos {minLength} caracteres",
+    "maxLength": "Este campo no puede tener más de {maxLength} caracteres",
     "addressSaved": "Dirección guardada"
   },
   "buttons": {

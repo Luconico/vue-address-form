@@ -21,7 +21,7 @@ export const isDisabled = (state) => {
 }
 
 export const isFetching = (state) => {
-    return (state.addressForm.saving || state.fetching)
+    return (state.isFetching)
 }
 
 export const formValues = (state) => {

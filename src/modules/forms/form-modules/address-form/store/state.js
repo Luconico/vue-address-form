@@ -2,8 +2,6 @@
 export default () => ({
     country: '',
     addressForm: {
-        saving: false,
-        submited: false,
         fields: {
             address: {
                 value: '',
@@ -44,6 +42,7 @@ export default () => ({
         messages: []
     },
     isValid: false,
+    isFetching: false,
     selectOptions: [{}],
     formValues: {
         fields: {}

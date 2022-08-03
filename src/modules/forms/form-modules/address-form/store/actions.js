@@ -53,7 +53,7 @@ export const getProvinceSelect = async ({ commit }, country) => {
 }
 
 export const getAddressForm = async ({ commit }, country) => {
-    commit('setFetching', { fetching: true })
+    commit('setFetching', { isFetching: true })
     const form = {
         ES: {
             saving: false,
@@ -68,7 +68,7 @@ export const getAddressForm = async ({ commit }, country) => {
                 },
                 postalCode: {
                     value: '',
-                    validations: ['required'],
+                    validations: ['required', 'minLength:5', 'maxLength:5'],
                     active: true,
                     error: false,
                     type: 'text'
@@ -186,18 +186,14 @@ export const getAddressForm = async ({ commit }, country) => {
     if (!addressForm) return
     setTimeout(() => {
         commit('setForm', { addressForm })
-        commit('setFetching', { fetching: false })
+        commit('setFetching', { isFetching: false })
     }, 500)
 
 }
 
 
-export const submit = async ({ commit, state }) => {
-    commit('checkErrors')
-    if (state.addressForm.messages.length > 0) return
+export const submit = async ({ commit }) => {
     commit('setFormValues')
-    commit('setSaving', { saving: true })
-    commit('setSubmited')
 }
 
 export const setCountry = async ({ commit }, country) => {

@@ -13,8 +13,7 @@ const useCompanyForm = () => {
 
   return {
     companyForm,
-    isDisabled: computed(() => store.getters['companyForm/isDisabled']),
-    isFetching: computed(() => store.getters['companyForm/isFetching']),
+    isDisabled: computed(() => store.getters['formBuilder/isDisabled']),
   };
 
 }

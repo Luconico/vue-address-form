@@ -26,8 +26,8 @@ const useAddressForm = () => {
   return {
     country,
     addressForm,
-    isDisabled: computed(() => store.getters['addressForm/isDisabled']),
     isFetching: computed(() => store.getters['addressForm/isFetching']),
+    isDisabled: computed(() => store.getters['formBuilder/isDisabled']),
     selectOptions: {
       country: computed(() => store.getters['addressForm/selectOptions']('country')),
       province: computed(() => store.getters['addressForm/selectOptions']('province'))

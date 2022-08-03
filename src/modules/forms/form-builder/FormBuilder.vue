@@ -8,8 +8,9 @@
 <script>
 import { ref } from "vue";
 import AlertMessages from "@/shared/alert-message/AlertMessages.vue";
-import { onMounted } from "@vue/runtime-core";
+import { onBeforeMount, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
+import formBuilderModule from "./store";
 export default {
   name: "FormBuilder",
   components: {
@@ -32,6 +33,10 @@ export default {
 
     const presentModules = ref([]);
 
+    onBeforeMount(() => store.registerModule("formBuilder", formBuilderModule));
+
+    onMounted(() => { registerFormModules() });
+
     const registerFormModules = () => {
       slots.default().map((slot) => {
         if (slot.type.name.includes("Form"))
@@ -41,21 +46,26 @@ export default {
       });
     };
 
-    onMounted(() => {
-      registerFormModules();
-    });
 
     return {
       messages,
       onSumbit: () => {
+        store.dispatch('formBuilder/isSubmitting', true);
         messages.value = [];
         formValues.value = {};
+
         presentModules.value.map((module) => {
           store.dispatch(`${module}Form/submit`);
           const { fields } = store.getters[`${module}Form/formValues`];
           formValues.value = { ...formValues.value, ...fields };
         });
+        
         console.log(formValues.value);
+        setTimeout(() => {
+          store.dispatch('formBuilder/isSubmitting', false);
+          store.dispatch('formBuilder/isSubmited', true);
+          messages.value = [{ type: "success", value: "Form Submitted" }];
+        }, 1000);
       },
     };
   },

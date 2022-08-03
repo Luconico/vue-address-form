@@ -2,9 +2,9 @@
       <button
         :type="type"
         :class="customClass"
-        :disabled="disabled || isFetching"
+        :disabled="disabled || isSubmitting"
     >
-      <LoaderSpinner v-if="isFetching" color="gray" size="1rem" />{{  buttonText  }}
+      <LoaderSpinner v-if="isSubmitting" color="gray" size="1rem" />{{  buttonText  }}
     </button>
 </template>
 
@@ -28,7 +28,7 @@ export default {
             type: Boolean,
             default: false
         },
-        isFetching: {
+        isSubmitting: {
             type: Boolean,
             default: false
         },

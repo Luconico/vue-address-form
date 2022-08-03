@@ -1,10 +1,6 @@
 
 
-export const submit = async ({ commit, state }) => {
-    commit('checkErrors')
+export const submit = async ({ commit }) => {
     commit('setFormValues')
-    if (state.companyForm.messages.length > 0) return
-    commit('setSaving', { saving: true })
-    commit('setSubmited')
 }
 

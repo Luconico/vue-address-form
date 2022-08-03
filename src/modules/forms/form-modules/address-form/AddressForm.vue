@@ -13,7 +13,7 @@
     <InputBuilder
       v-if="field.active"
       :type="field.type"
-      :disabled="isDisabled"
+      :disabled="isDisabled || isFetching"
       :label="$t(index)"
       :required="field.validations.includes('required')"
       v-model="field.value"

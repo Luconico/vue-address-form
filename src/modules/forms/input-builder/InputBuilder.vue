@@ -34,7 +34,7 @@
             'text-warning': isWarning
             }
         ">
-         * {{ $t(errorMessage.value) }}
+         * {{ $t(errorMessage.value, errorMessage.options) }}
           </div>
       </div>
     </div>

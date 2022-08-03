@@ -14,8 +14,8 @@ export const setForm = (state, { addressForm }) => {
     state.addressForm = addressForm
 }
 
-export const setFetching = (state, { fetching }) => {
-    state.fetching = fetching
+export const setFetching = (state, { isFetching }) => {
+    state.isFetching = isFetching
 }
 
 export const setSaving = (state, { saving }) => {

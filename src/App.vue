@@ -4,6 +4,7 @@
     <AddressForm :customClass="inputClass" />
     <ButtonBuilder
       :type="'submit'"
+      :isSubmitting="isSubmitting"
       :customClass="{ 'btn btn-secondary': true }"
     />
   </FormBuilder>
@@ -16,6 +17,8 @@ import AddressForm from "@/modules/forms/form-modules/address-form/AddressForm.v
 import CompanyForm from "@/modules/forms/form-modules/company-form/CompanyForm.vue";
 import { ref } from "@vue/reactivity";
 import { LOCATION } from "./global";
+import { useStore } from 'vuex';
+import { computed } from '@vue/runtime-core';
 
 export default {
   name: "address-form",
@@ -26,9 +29,11 @@ export default {
     ButtonBuilder,
   },
   setup() {
+    const store = useStore()
     const location = ref(LOCATION);
     return {
       location,
+      isSubmitting: computed(() => store.getters['formBuilder/isSubmitting']),
       inputClass: "custom-form-group mb-4",
     };
   },
