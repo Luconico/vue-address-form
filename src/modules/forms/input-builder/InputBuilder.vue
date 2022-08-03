@@ -1,10 +1,11 @@
 <template>
   <template v-if="type === 'text'">
-    <div :class="customClass">
+    <div :class="[customClass,{'--error': isError, '--warning': isWarning}]">
       <span
         >{{ label }}
-        <span :title="$t('msg.required')" v-if="required">*</span></span
-      >
+        <span :title="$t('msg.required')" v-if="required">*</span>
+        <LoaderSpinner v-if="isValidating" color="gray" size="1rem" />
+      </span>
       <input
         :name="name"
         :type="type"
@@ -21,11 +22,21 @@
             v-for="value in filteredValues"
             :key="value"
             v-html="value"
-            @click="setFromSuggest(value)"
+            @click="updateValueFromSuggest(value)"
           ></span>
         </div>
       </div>
-      
+      <div class="error-message-container" v-if="errorMessage">
+        <div 
+          class="error-message" 
+          :class="{
+            'text-danger': isError, 
+            'text-warning': isWarning
+            }
+        ">
+         * {{ $t(errorMessage.value) }}
+          </div>
+      </div>
     </div>
   </template>
 
@@ -33,8 +44,8 @@
     <div :class="customClass">
       <span
         >{{ label }} <span :title="$t('msg.required')" v-if="required">*</span
-        ><LoaderSpinner v-if="!options" color="gray" size="1rem"
-      /></span>
+        ><LoaderSpinner v-if="!options" color="gray" size="1rem" />
+      </span>
       <select
         :name="name"
         :value="modelValue"
@@ -48,7 +59,11 @@
             :key="value"
             :value="value"
           >
-            {{ options.translate ? $t(`selectOptions.${options.select}.${value}`) : value }}
+            {{
+              options.translate
+                ? $t(`selectOptions.${options.select}.${value}`)
+                : value
+            }}
           </option>
         </template>
       </select>
@@ -74,8 +89,9 @@
 
 <script>
 import LoaderSpinner from "@/shared/loader-spinner/LoaderSpinner.vue";
-import { ref, watch } from '@vue/runtime-core';
-import { useI18n } from 'vue-i18n'
+import { computed, ref, watch } from "@vue/runtime-core";
+import { useI18n } from "vue-i18n";
+import { checkValidations } from '../helpers/validation-utils';
 
 export default {
   components: { LoaderSpinner },
@@ -110,47 +126,69 @@ export default {
       default: false,
     },
     customClass: {
-      type: Object,
-      default: () => ({}),
+      type: Array,
+      default: () => ([]),
     },
     options: {
       type: Object,
-      default: () => ({}),
+      default: () => (null),
+    },
+    validations: {
+      type: Array,
+      default: () => [],
     },
   },
   setup(props, context) {
-    const { t } = useI18n()
+    const { t } = useI18n();
     const filteredValues = ref([]);
 
+    const isValidating = ref(false);
+    const errorMessage = ref(null);
+
+    const validationDebounce = ref(null);
+
     watch(() => props.modelValue, (newValue) => {
-      handleSuggestions(newValue);
-      hadleValidations(newValue);
+        handleSuggestions(newValue);
+        hadleValidations(newValue);
     });
 
     const handleSuggestions = (newValue) => {
-      if (props.type !== 'text' || !props.options) return
-      
-      filteredValues.value = props.options.options.map(({value}) => value)
-      .filter((word) => word.toLowerCase().includes(newValue.toLowerCase()))
+      if (props.type !== "text" || !props.options) return;
 
-      const isSameWord = (filteredValues.value.join("").toString().toLowerCase() === newValue.toLowerCase())
-      if (isSameWord) return filteredValues.value = []
-  
+      filteredValues.value = props.options.options
+        .map(({ value }) => value)
+        .filter((word) => word.toLowerCase().includes(newValue.toLowerCase()));
+
+      const isSameWord = (filteredValues.value.join("").toString().toLowerCase() === newValue.toLowerCase());
+      if (isSameWord) return (filteredValues.value = []);
+
       filteredValues.value = filteredValues.value
-      .map((word) => props.options.translate ? t(`selectOptions.${props.options.select}.${word}`) : word)
-      .map((word) => word.replace(RegExp(newValue, "gi"), (str) => "<b>" + str + "</b>"))
-      .slice(0, 3).sort();
-    }
+        .map((word) =>  props.options.translate  ? t(`selectOptions.${props.options.select}.${word}`) : word)
+        .map((word) => word.replace(RegExp(newValue, "gi"), (str) => "<b>" + str + "</b>"))
+        .slice(0, 3)
+        .sort();
+    };
 
     const hadleValidations = (newValue) => {
-      console.log(newValue)
-      return true
-    }
+      if (props.validations.length < 1) return;
+      clearTimeout(validationDebounce.value)
+      isValidating.value = true;
+      validationDebounce.value = setTimeout(async () => {
+        errorMessage.value = await checkValidations(newValue, props.validations);
+        isValidating.value = false;
+      }, 400)
+    };
 
     return {
       filteredValues,
-      setFromSuggest: (value) => {
-        const suggested = value.replace(RegExp("<b>", "g"), "").replace(RegExp("</b>", "g"), "");
+      isValidating,
+      errorMessage,
+      isError: computed(() => errorMessage.value && errorMessage.value.msgType === "error"),
+      isWarning: computed(() => errorMessage.value && errorMessage.value.msgType === "warning"),
+      updateValueFromSuggest: (value) => {
+        const suggested = value
+          .replace(RegExp("<b>", "g"), "")
+          .replace(RegExp("</b>", "g"), "");
         context.emit("update:modelValue", suggested);
       },
       updateValue: (event) => {

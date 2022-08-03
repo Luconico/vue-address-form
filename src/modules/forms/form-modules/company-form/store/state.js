@@ -6,16 +6,16 @@ export default () => ({
         fields: {
             companyName: {
                 value: '',
-                required: true,
+                validations: ['required'],
                 active: true,
-                error: false,
+                valid: false,
                 type: 'text',
             },
             cif: {
                 value: '',
-                required: true,
+                validations: ['required'],
                 active: true,
-                error: false,
+                valid: false,
                 type: 'text',
             }
         },

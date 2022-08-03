@@ -1,5 +1,4 @@
-import { getCleanFormValues } from '@/helpers/forms/form-utils'
-
+import { getCleanFormValues } from '@/modules/forms/helpers/form-utils'
 
 export const setSelectOptions = (state, { newSelect }) => {
     const exist = state.selectOptions.find((select, index) => {
@@ -37,22 +36,14 @@ export const setFormValues = (state) => {
         fields: {
             country: state.country,
             ...getCleanFormValues(state.addressForm.fields)
-        },
-        messages: [...state.addressForm.messages]
+        }
     }
 }
 
 export const checkErrors = (state) => {
-    state.addressForm.messages = []
-    const { fields, messages } = state.addressForm
-    if (state.country === '') {
-        messages.push({ msgType: "error", value: "msg.countryRequired" })
-    }
-    Object.keys(fields).forEach(key => {
-        fields[key].error = false
-        if (fields[key].required && fields[key].active && fields[key].value === '') {
-            fields[key].error = true
-            messages.push({ msgType: "error", value: `msg.${key}Required` })
-        }
-    })
+    const { fields } = state.addressForm
+    console.log(fields)
+    // Object.keys(fields).forEach(key => {
+
+    // })
 }

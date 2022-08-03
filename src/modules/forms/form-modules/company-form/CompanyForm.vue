@@ -5,7 +5,7 @@
       :type="field.type"
       :disabled="isDisabled"
       :label="$t(index)"
-      :required="field.required"
+      :required="field.validations.includes('required')"
       v-model="field.value"
       :name="index"
       :customClass="[customClass, {'--error': field.error}]"

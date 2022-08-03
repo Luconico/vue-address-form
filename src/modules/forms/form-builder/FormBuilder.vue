@@ -50,15 +50,12 @@ export default {
       onSumbit: () => {
         messages.value = [];
         formValues.value = {};
-
         presentModules.value.map((module) => {
           store.dispatch(`${module}Form/submit`);
-          const moduleValues = store.getters[`${module}Form/formValues`];
-          messages.value = [...messages.value, ...moduleValues.messages];
-          formValues.value = { ...formValues.value, ...moduleValues.fields };
+          const { fields } = store.getters[`${module}Form/formValues`];
+          formValues.value = { ...formValues.value, ...fields };
         });
         console.log(formValues.value);
-        if (messages.value.length > 0) return;
       },
     };
   },
@@ -66,10 +63,17 @@ export default {
 </script>
 
 <style>
-.suggestions-container {
+input:focus-visible,
+textarea:focus-visible {
+    outline: none;
+}
+
+.suggestions-container,
+.error-message-container {
   width: 100%;
   position: relative;
 }
+
 .suggestions-list {
   display: flex;
   flex-direction: column;
@@ -94,5 +98,11 @@ export default {
 
 .suggestions-list > span:hover {
   background-color: #ccc;
+}
+
+.error-message {
+  position: absolute;
+  font-size: 0.8rem;
+  font-style: italic;
 }
 </style>

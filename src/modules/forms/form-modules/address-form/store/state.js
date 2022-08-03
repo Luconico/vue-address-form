@@ -7,46 +7,45 @@ export default () => ({
         fields: {
             address: {
                 value: '',
-                required: true,
+                validations: ['required'],
                 active: true,
-                error: false,
+                valid: false,
                 type: 'text',
             },
             postalCode: {
                 value: '',
-                required: true,
+                validations: ['required'],
                 active: true,
-                error: false,
+                valid: false,
                 type: 'text'
             },
             city: {
                 value: '',
-                required: false,
+                validations: ['required'],
                 active: true,
-                error: false,
+                valid: false,
                 type: 'text'
             },
             province: {
                 value: '',
-                required: false,
+                validations: [],
                 active: false,
-                error: false,
+                valid: false,
                 type: 'select'
             },
             moreInfo: {
                 value: '',
-                required: false,
+                validations: [],
                 active: true,
-                error: false,
+                valid: false,
                 type: 'textarea'
             },
         },
         messages: []
     },
+    isValid: false,
     selectOptions: [{}],
-    fetching: false,
     formValues: {
-        fields: {},
-        messages:[]
+        fields: {}
     },
 })

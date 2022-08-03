@@ -61,35 +61,35 @@ export const getAddressForm = async ({ commit }, country) => {
             fields: {
                 address: {
                     value: '',
-                    required: true,
+                    validations: ['required'],
                     active: true,
                     error: false,
                     type: 'text',
                 },
                 postalCode: {
                     value: '',
-                    required: true,
+                    validations: ['required'],
                     active: true,
                     error: false,
                     type: 'text'
                 },
                 city: {
                     value: '',
-                    required: false,
+                    validations: ['required'],
                     active: true,
                     error: false,
                     type: 'text'
                 },
                 province: {
                     value: '',
-                    required: true,
+                    validations: ['required'],
                     active: true,
                     error: false,
                     type: 'text'
                 },
                 moreInfo: {
                     value: '',
-                    required: false,
+                    validations: [],
                     active: true,
                     error: false,
                     type: 'textarea'
@@ -103,35 +103,35 @@ export const getAddressForm = async ({ commit }, country) => {
             fields: {
                 address: {
                     value: '',
-                    required: true,
+                    validations: ['required'],
                     active: true,
                     error: false,
                     type: 'text',
                 },
                 postalCode: {
                     value: '',
-                    required: true,
+                    validations: ['required'],
                     active: true,
                     error: false,
                     type: 'text'
                 },
                 city: {
                     value: '',
-                    required: false,
+                    validations: ['required'],
                     active: false,
                     error: false,
                     type: 'text'
                 },
                 province: {
                     value: '',
-                    required: false,
+                    validations: [],
                     active: false,
                     error: false,
                     type: 'select'
                 },
                 moreInfo: {
                     value: '',
-                    required: false,
+                    validations: [],
                     active: true,
                     error: false,
                     type: 'textarea'
@@ -145,35 +145,35 @@ export const getAddressForm = async ({ commit }, country) => {
             fields: {
                 address: {
                     value: '',
-                    required: true,
+                    validations: ['required'],
                     active: true,
                     error: false,
                     type: 'text',
                 },
                 postalCode: {
                     value: '',
-                    required: true,
+                    validations: ['required'],
                     active: true,
                     error: false,
                     type: 'text'
                 },
                 city: {
                     value: '',
-                    required: true,
+                    validations: ['required'],
                     active: true,
                     error: false,
                     type: 'text'
                 },
                 province: {
                     value: '',
-                    required: false,
+                    validations: ['required'],
                     active: false,
                     error: false,
                     type: 'select'
                 },
                 moreInfo: {
                     value: '',
-                    required: false,
+                    validations: [],
                     active: true,
                     error: false,
                     type: 'textarea'
@@ -194,8 +194,8 @@ export const getAddressForm = async ({ commit }, country) => {
 
 export const submit = async ({ commit, state }) => {
     commit('checkErrors')
-    commit('setFormValues')
     if (state.addressForm.messages.length > 0) return
+    commit('setFormValues')
     commit('setSaving', { saving: true })
     commit('setSubmited')
 }
