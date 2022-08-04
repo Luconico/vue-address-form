@@ -11,3 +11,7 @@ export const setIsValid = (state, { isValid }) => {
 export const setSubmited = (state, { submited }) => {
     state.submited = submited
 }
+
+export const setPressentModules = (state, { pressentModule }) => {
+    state.pressentModules = [...state.pressentModules, pressentModule]
+}

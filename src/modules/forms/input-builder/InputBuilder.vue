@@ -190,7 +190,9 @@ export default {
       errorMessage,
       isFocus,
       setFocus(value) {
-        isFocus.value = value;
+        setTimeout(() => {
+          isFocus.value = value;
+        }, 100);
       },
       isError: computed(() => errorMessage.value && errorMessage.value.msgType === "error"),
       isWarning: computed(() => errorMessage.value && errorMessage.value.msgType === "warning"),
