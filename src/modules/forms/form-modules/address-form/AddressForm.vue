@@ -21,6 +21,7 @@
       :options="selectOptions[index] ? selectOptions[index].value : null"
       :validations="field.validations"
       :customClass="[customClass]"
+      @onValidated="onValidated"
     />
   </template>
 </template>
@@ -41,10 +42,10 @@ export default {
     },
   },
   setup() {
-
     const {
       country,
       addressForm,
+      onValidated,
       isDisabled,
       isFetching,
       selectOptions,
@@ -55,6 +56,7 @@ export default {
       isDisabled,
       isFetching,
       addressForm,
+      onValidated,
       selectOptions,
     };
   },
@@ -62,5 +64,4 @@ export default {
 </script>
 
 <style>
-
 </style>

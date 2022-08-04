@@ -35,7 +35,9 @@ export default {
 
     onBeforeMount(() => store.registerModule("formBuilder", formBuilderModule));
 
-    onMounted(() => { registerFormModules() });
+    onMounted(() => {
+      registerFormModules();
+    });
 
     const registerFormModules = () => {
       slots.default().map((slot) => {
@@ -46,11 +48,11 @@ export default {
       });
     };
 
-
+    // presentModules.value.every((module) => store.getters[`${module}Form/isValid`])
     return {
       messages,
       onSumbit: () => {
-        store.dispatch('formBuilder/isSubmitting', true);
+        store.dispatch("formBuilder/isSubmitting", true);
         messages.value = [];
         formValues.value = {};
 
@@ -59,11 +61,11 @@ export default {
           const { fields } = store.getters[`${module}Form/formValues`];
           formValues.value = { ...formValues.value, ...fields };
         });
-        
+
         console.log(formValues.value);
         setTimeout(() => {
-          store.dispatch('formBuilder/isSubmitting', false);
-          store.dispatch('formBuilder/isSubmited', true);
+          store.dispatch("formBuilder/isSubmitting", false);
+          store.dispatch("formBuilder/isSubmited", true);
           messages.value = [{ type: "success", value: "Form Submitted" }];
         }, 1000);
       },
@@ -75,7 +77,7 @@ export default {
 <style>
 input:focus-visible,
 textarea:focus-visible {
-    outline: none;
+  outline: none;
 }
 
 .suggestions-container,

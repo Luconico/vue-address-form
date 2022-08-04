@@ -1,8 +1,6 @@
 
 export default () => ({
     companyForm: {
-        saving: false,
-        submited: false,
         fields: {
             companyName: {
                 value: '',
@@ -18,13 +16,12 @@ export default () => ({
                 valid: false,
                 type: 'text',
             }
-        },
-        messages: []
+        }
     },
+    isValid: false,
     selectOptions: [{}],
     fetching: false,
     formValues: {
-        fields: {},
-        messages:[]
+        fields: {}
     },
 })

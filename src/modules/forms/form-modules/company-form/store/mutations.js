@@ -14,18 +14,6 @@ export const setForm = (state, { companyForm }) => {
     state.companyForm = companyForm
 }
 
-export const setFetching = (state, { fetching }) => {
-    state.fetching = fetching
-}
-
-export const setSaving = (state, { saving }) => {
-    state.companyForm.saving = saving
-}
-
-export const setSubmited = (state) => {
-    state.companyForm.saving = false
-    state.companyForm.submited = true
-}
 
 export const setFormValues = (state) => {
     state.formValues = {
@@ -35,10 +23,11 @@ export const setFormValues = (state) => {
     }
 }
 
-export const checkErrors = (state) => {
-    const { fields } = state.companyForm
-    console.log(fields)
-    // Object.keys(fields).forEach(key => {
-
-    // })
+export const setIsValid = (state, { isValid, field }) => {
+    Object.entries(state.companyForm.fields).forEach(([key,value]) => {
+         if (value.validations.length === 0 || !value.active) value.valid = true
+         if (key === field) value.valid = isValid
+    })
+    const allFieldsValid = Object.values(state.companyForm.fields).every((field) => field.valid)
+    state.isValid = allFieldsValid
 }

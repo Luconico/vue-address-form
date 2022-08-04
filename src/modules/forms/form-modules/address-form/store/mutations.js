@@ -18,18 +18,11 @@ export const setFetching = (state, { isFetching }) => {
     state.isFetching = isFetching
 }
 
-export const setSaving = (state, { saving }) => {
-    state.addressForm.saving = saving
-}
 
 export const setCountry = (state, { country }) => {
     state.country = country
 }
 
-export const setSubmited = (state) => {
-    state.addressForm.saving = false
-    state.addressForm.submited = true
-}
 
 export const setFormValues = (state) => {
     state.formValues = {
@@ -40,10 +33,12 @@ export const setFormValues = (state) => {
     }
 }
 
-export const checkErrors = (state) => {
-    const { fields } = state.addressForm
-    console.log(fields)
-    // Object.keys(fields).forEach(key => {
 
-    // })
+export const setIsValid = (state, { isValid, field }) => {
+    Object.entries(state.addressForm.fields).forEach(([key,value]) => {
+         if (value.validations.length === 0 || !value.active) value.valid = true
+         if (key === field) value.valid = isValid
+    })
+    const allFieldsValid = Object.values(state.addressForm.fields).every((field) => field.valid)
+    state.isValid = allFieldsValid
 }

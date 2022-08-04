@@ -190,3 +190,8 @@ export const submit = async ({ commit }) => {
 export const setCountry = async ({ commit }, country) => {
     commit('setCountry', {country})
 }
+
+
+export const setIsValid = async ({ commit }, {isValid, field}) => {
+    commit('setIsValid', {isValid, field})
+}

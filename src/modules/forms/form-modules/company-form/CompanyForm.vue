@@ -10,6 +10,7 @@
       :name="index"
       :validations="field.validations"
       :customClass="[customClass, {'--error': field.error}]"
+      @onValidated="onValidated"
     />
   </template>
 </template>
@@ -30,11 +31,11 @@ export default {
     },
   },
   setup() {
-    const { companyForm, isDisabled, selectOptions } = useCompanyForm();
+    const { companyForm, isDisabled, onValidated } = useCompanyForm();
     return {
       isDisabled,
       companyForm,
-      selectOptions,
+      onValidated
     };
   },
 };

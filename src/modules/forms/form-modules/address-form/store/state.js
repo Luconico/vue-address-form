@@ -38,8 +38,7 @@ export default () => ({
                 valid: false,
                 type: 'textarea'
             },
-        },
-        messages: []
+        }
     },
     isValid: false,
     isFetching: false,

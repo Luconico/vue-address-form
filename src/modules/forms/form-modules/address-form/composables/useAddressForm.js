@@ -26,6 +26,7 @@ const useAddressForm = () => {
   return {
     country,
     addressForm,
+    onValidated: ({isValid, field}) => { store.dispatch('addressForm/setIsValid', { isValid, field }) },
     isFetching: computed(() => store.getters['addressForm/isFetching']),
     isDisabled: computed(() => store.getters['formBuilder/isDisabled']),
     selectOptions: {

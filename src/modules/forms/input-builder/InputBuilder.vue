@@ -180,6 +180,7 @@ export default {
       validationDebounce.value = setTimeout(async () => {
         errorMessage.value = await checkValidations(newValue, props.validations);
         isValidating.value = false;
+        context.emit("onValidated", { isValid: (!errorMessage.value), field: props.name,  });
       }, 400)
     };
 

@@ -13,6 +13,7 @@ const useCompanyForm = () => {
 
   return {
     companyForm,
+    onValidated: ({isValid, field}) => { store.dispatch('companyForm/setIsValid', { isValid, field }) },
     isDisabled: computed(() => store.getters['formBuilder/isDisabled']),
   };
 

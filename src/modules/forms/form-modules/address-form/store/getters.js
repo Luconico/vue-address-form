@@ -12,18 +12,14 @@ export const form = (state) => {
     return state.addressForm
 }
 
-export const buttonText = (state) => {
-    return state.buttonText
-}
-
-export const isDisabled = (state) => {
-    return (state.addressForm.saving || state.addressForm.submited || state.fetching)
-}
-
 export const isFetching = (state) => {
     return (state.isFetching)
 }
 
 export const formValues = (state) => {
     return state.formValues
+}
+
+export const isValid = (state) => {
+    return state.isValid
 }
