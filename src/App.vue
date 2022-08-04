@@ -5,6 +5,7 @@
     <ButtonBuilder
       :type="'submit'"
       :isSubmitting="isSubmitting"
+      :disabled="isSubmitting || !isValid"
       :customClass="{ 'btn btn-secondary': true }"
     />
   </FormBuilder>
@@ -33,6 +34,7 @@ export default {
     const location = ref(LOCATION);
     return {
       location,
+      isValid: computed(() => store.getters['formBuilder/isValid']),
       isSubmitting: computed(() => store.getters['formBuilder/isSubmitting']),
       inputClass: "custom-form-group mb-4",
     };

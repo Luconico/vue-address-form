@@ -4,7 +4,8 @@ export const isSubmitting = ({ commit }, isSubmitting) => {
     commit('setIsSubmitting', { isSubmitting })
 }
 
-export const isValid = ({ commit }, isValid) => {
+export const isValid = ({ commit, state, rootState }) => {
+    const isValid = state.pressentModules.every((module) => rootState[`${module}Form`].isValid)
     commit('setIsValid', { isValid })
 }
 

@@ -26,12 +26,10 @@ export default {
       default: () => ({}),
     },
   },
-  setup(props, { slots }) {
+  setup(props, { slots, emit }) {
     const store = useStore();
     const messages = ref([]);
     const formValues = ref({});
-
-    const presentModules = ref([]);
 
     onBeforeMount(() => store.registerModule("formBuilder", formBuilderModule));
 
@@ -42,9 +40,7 @@ export default {
     const registerFormModules = () => {
       slots.default().map((slot) => {
         if (slot.type.name.includes("Form"))
-          presentModules.value.push(
-            slot.type.name.toLowerCase().replace("form", "")
-          );
+          store.dispatch("formBuilder/pressentModule", slot.type.name.toLowerCase().replace("form", ""));
       });
     };
 
@@ -55,14 +51,15 @@ export default {
         store.dispatch("formBuilder/isSubmitting", true);
         messages.value = [];
         formValues.value = {};
-
-        presentModules.value.map((module) => {
+        
+        store.getters['formBuilder/pressentModules'].map((module) => {
           store.dispatch(`${module}Form/submit`);
           const { fields } = store.getters[`${module}Form/formValues`];
           formValues.value = { ...formValues.value, ...fields };
         });
 
         console.log(formValues.value);
+        emit("submit", formValues.value);
         setTimeout(() => {
           store.dispatch("formBuilder/isSubmitting", false);
           store.dispatch("formBuilder/isSubmited", true);

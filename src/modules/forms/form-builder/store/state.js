@@ -1,6 +1,7 @@
 
 export default () => ({
     isSubmitting: false,
-    isValid: true,
+    isValid: false,
     submited: false,
+    pressentModules: []
 })
