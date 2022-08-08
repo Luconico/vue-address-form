@@ -11,8 +11,8 @@
         :type="type"
         :value="modelValue"
         @input="updateValue"
-        @focus="setFocus(true)"
-        @blur="setFocus(false)"
+        @focus="onFocus(true)"
+        @blur="onFocus(false)"
         :disabled="disabled"
       />
       <div class="suggestions-container">
@@ -139,6 +139,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    validationFunction: {
+      type: Function,
+      default: () => (null),
+    },
   },
   setup(props, context) {
     const { t } = useI18n();
@@ -153,7 +157,7 @@ export default {
 
     watch(() => props.modelValue, (newValue) => {
         handleSuggestions(newValue);
-        hadleValidations(newValue);
+        hadleCommonValidations(newValue);
     });
 
     const handleSuggestions = (newValue) => {
@@ -173,26 +177,31 @@ export default {
         .sort();
     };
 
-    const hadleValidations = (newValue) => {
+    const hadleCommonValidations = (newValue) => {
       if (props.validations.length < 1) return;
       clearTimeout(validationDebounce.value)
-      isValidating.value = true;
-      validationDebounce.value = setTimeout(async () => {
-        errorMessage.value = await checkValidations(newValue, props.validations);
-        isValidating.value = false;
+      validationDebounce.value = setTimeout(() => {
+        errorMessage.value = checkValidations(newValue, props.validations);
         context.emit("onValidated", { isValid: (!errorMessage.value), field: props.name,  });
       }, 400)
     };
+
+    const handleCustomValidation = async () => {
+      if (!props.validationFunction) return;
+      errorMessage.value = await props.validationFunction(props.modelValue);
+      context.emit("onValidated", { isValid: (!errorMessage.value), field: props.name,  });
+    }
 
     return {
       filteredValues,
       isValidating,
       errorMessage,
       isFocus,
-      setFocus(value) {
+      onFocus(value) {
         setTimeout(() => {
           isFocus.value = value;
         }, 100);
+        handleCustomValidation()
       },
       isError: computed(() => errorMessage.value && errorMessage.value.msgType === "error"),
       isWarning: computed(() => errorMessage.value && errorMessage.value.msgType === "warning"),
