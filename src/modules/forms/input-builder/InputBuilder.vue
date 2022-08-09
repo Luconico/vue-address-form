@@ -94,7 +94,6 @@ import LoaderSpinner from "@/shared/loader-spinner/LoaderSpinner.vue";
 import { computed, ref, watch } from "@vue/runtime-core";
 import { useI18n } from "vue-i18n";
 import { checkValidations } from '../helpers/validation-utils';
-
 export default {
   components: { LoaderSpinner },
   name: "InputBuilder",
@@ -141,7 +140,11 @@ export default {
     },
     validationFunction: {
       type: Function,
-      default: () => (null),
+      default: null,
+    },
+    mask: {
+      type: Object,
+      default: null,
     },
   },
   setup(props, context) {
@@ -188,9 +191,12 @@ export default {
 
     const handleCustomValidation = async () => {
       if (!props.validationFunction) return;
+      isValidating.value = true;
       errorMessage.value = await props.validationFunction(props.modelValue);
+      isValidating.value = false;
       context.emit("onValidated", { isValid: (!errorMessage.value), field: props.name,  });
     }
+
 
     return {
       filteredValues,
