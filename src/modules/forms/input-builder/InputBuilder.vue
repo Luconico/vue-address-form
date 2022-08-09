@@ -201,7 +201,7 @@ export default {
         setTimeout(() => {
           isFocus.value = value;
         }, 100);
-        handleCustomValidation()
+        if (!value) handleCustomValidation()
       },
       isError: computed(() => errorMessage.value && errorMessage.value.msgType === "error"),
       isWarning: computed(() => errorMessage.value && errorMessage.value.msgType === "warning"),
