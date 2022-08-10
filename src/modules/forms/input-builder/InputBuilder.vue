@@ -6,6 +6,11 @@
         <span :title="$t('msg.required')" v-if="required">*</span>
         <LoaderSpinner v-if="isValidating" color="gray" size="1rem" />
       </span>
+      <div v-if="mask" class="masked-container">
+        <div class="masked-value">
+          {{ maskedValue }}
+        </div>
+      </div>
       <input
         :name="name"
         :type="type"
@@ -94,6 +99,7 @@ import LoaderSpinner from "@/shared/loader-spinner/LoaderSpinner.vue";
 import { computed, ref, watch } from "@vue/runtime-core";
 import { useI18n } from "vue-i18n";
 import { checkValidations } from '../helpers/validation-utils';
+ import { mask } from 'maska'
 export default {
   components: { LoaderSpinner },
   name: "InputBuilder",
@@ -143,8 +149,8 @@ export default {
       default: null,
     },
     mask: {
-      type: Object,
-      default: null,
+      type: String,
+      default: '### ### ### ###',
     },
   },
   setup(props, context) {
@@ -203,6 +209,7 @@ export default {
       isValidating,
       errorMessage,
       isFocus,
+      maskedValue: computed(() => mask(props.modelValue, props.mask)),
       onFocus(value) {
         setTimeout(() => {
           isFocus.value = value;

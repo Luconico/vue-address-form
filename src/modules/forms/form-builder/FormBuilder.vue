@@ -114,4 +114,18 @@ textarea:focus-visible {
   font-size: 0.8rem;
   font-style: italic;
 }
+
+.masked-container {
+  position: relative;
+}
+.masked-value {
+  position: absolute;
+  pointer-events: none;
+  top: 2px;
+  left: 4px;
+  width: 100%;
+  background-color: #fff;
+  overflow: hidden;
+  z-index: 1;
+}
 </style>
