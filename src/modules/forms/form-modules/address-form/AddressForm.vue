@@ -21,6 +21,8 @@
       :options="selectOptions[index] ? selectOptions[index].value : null"
       :validations="field.validations"
       :customClass="[customClass]"
+      :mask="field.mask"
+      :validationFunction="field.validationFunction"
       @onValidated="onValidated"
     />
   </template>
@@ -40,8 +42,12 @@ export default {
       type: String,
       default: "",
     },
+    location: {
+      type: String,
+      default: "",
+    },
   },
-  setup() {
+  setup(props) {
     const {
       country,
       addressForm,
@@ -49,7 +55,7 @@ export default {
       isDisabled,
       isFetching,
       selectOptions,
-    } = useAddressForm();
+    } = useAddressForm(props);
 
     return {
       country,

@@ -16,6 +16,7 @@ export default {
   components: {
     AlertMessages,
   },
+  emits: ["onSubmit"],
   props: {
     customId: {
       type: String,
@@ -25,10 +26,13 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    messages: {
+      type: Array,
+      default: () => ([]),
+    },
   },
   setup(props, { slots, emit }) {
     const store = useStore();
-    const messages = ref([]);
     const formValues = ref({});
 
     onBeforeMount(() => store.registerModule("formBuilder", formBuilderModule));
@@ -44,27 +48,17 @@ export default {
       });
     };
 
-    // presentModules.value.every((module) => store.getters[`${module}Form/isValid`])
     return {
-      messages,
       onSumbit: () => {
-        store.dispatch("formBuilder/isSubmitting", true);
-        messages.value = [];
         formValues.value = {};
-        
+  
         store.getters['formBuilder/pressentModules'].map((module) => {
           store.dispatch(`${module}Form/submit`);
           const { fields } = store.getters[`${module}Form/formValues`];
           formValues.value = { ...formValues.value, ...fields };
         });
 
-        console.log(formValues.value);
-        emit("submit", formValues.value);
-        setTimeout(() => {
-          store.dispatch("formBuilder/isSubmitting", false);
-          store.dispatch("formBuilder/isSubmited", true);
-          messages.value = [{ type: "success", value: "Form Submitted" }];
-        }, 1000);
+        emit("onSubmit", formValues.value);
       },
     };
   },
@@ -76,6 +70,7 @@ input:focus-visible,
 textarea:focus-visible {
   outline: none;
 }
+
 
 .suggestions-container,
 .error-message-container {
@@ -122,10 +117,22 @@ textarea:focus-visible {
   position: absolute;
   pointer-events: none;
   top: 2px;
-  left: 4px;
+  left: 2px;
   width: 95%;
   background-color: #fff;
   overflow: hidden;
   z-index: 1;
+  padding-left: 2px;
+  padding-bottom: 1px;
+}
+input:disabled,
+select:disabled,
+textarea:disabled,
+.masked-disabled {
+  cursor: not-allowed;
+}
+.masked-disabled {
+  background-color: #F8F8F8;
+  pointer-events: auto;
 }
 </style>

@@ -9,34 +9,44 @@ export default () => ({
                 active: true,
                 valid: false,
                 type: 'text',
+                validationFunction: null,
+                mask: null,
             },
-            postalCode: {
+            zipCode: {
                 value: '',
                 validations: ['required', 'minLength:5', 'maxLength:5'],
                 active: true,
                 valid: false,
-                type: 'text'
+                type: 'text',
+                validationFunction: null,
+                mask: null,
             },
             city: {
                 value: '',
                 validations: ['required'],
                 active: true,
                 valid: false,
-                type: 'text'
+                type: 'text',
+                validationFunction: null,
+                mask: null,
             },
             province: {
                 value: '',
                 validations: [],
                 active: false,
                 valid: false,
-                type: 'select'
+                type: 'select',
+                validationFunction: null,
+                mask: null,
             },
             moreInfo: {
                 value: '',
                 validations: [],
                 active: true,
                 valid: false,
-                type: 'textarea'
+                type: 'textarea',
+                validationFunction: null,
+                mask: null,
             },
         }
     },

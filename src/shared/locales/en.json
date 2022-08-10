@@ -1,7 +1,7 @@
 {
   "country": "Country",
   "address": "Address",
-  "postalCode": "ZIP code",
+  "zipCode": "ZIP code",
   "city": "City",
   "province": "Province",
   "moreInfo": "Additional information",
@@ -11,27 +11,14 @@
       "DE": "Germany", 
       "AD": "Andorra",
       "FR": "France",
-      "UK": "United Kingdom"
-    },
-    "province": {
-      "madrid": "Madrid",
-      "barcelona": "Barcelona",
-      "valencia": "Valencia",
-      "sevilla": "Sevilla",
-      "caceres": "Caceres",
-      "jaen": "Jaen",
-      "malaga": "Málaga",
-      "cadiz": "Cádiz"
+      "EN": "United Kingdom"
     }
   },
   "msg": {
     "required": "This field is required",
-    "addressSaved": "Address saved",
-    "countryRequired": "Country is required",
-    "addressRequired": "Address is required",
-    "postalCodeRequired": "ZIP code is required",
-    "cityRequired": "City is required",
-    "provinceRequired": "Province is required"
+    "minLength": "This field must be at least {0} characters long",
+    "maxLength": "This field must be at most {0} characters long",
+    "addressSaved": "Address saved"
   },
   "buttons": {
     "save": "Save"

@@ -1,6 +1,7 @@
 <template>
-  <FormBuilder :customClass="{ 'custom-form': true }">
+  <FormBuilder :customClass="{ 'custom-form': true }" @onSubmit="onSubmit" :messages="messages">
     <CompanyForm :customClass="inputClass" />
+    <AddressForm :customClass="inputClass" :location="location"/>
     <ButtonBuilder
       :type="'submit'"
       :isSubmitting="isSubmitting"
@@ -20,22 +21,37 @@ import { ref } from "@vue/reactivity";
 import { LOCATION } from "./global";
 import { useStore } from 'vuex';
 import { computed } from '@vue/runtime-core';
+import AddressForm from '@/modules/forms/form-modules/address-form/AddressForm.vue';
 
 export default {
   name: "address-form",
   components: {
     FormBuilder,
     CompanyForm,
+    AddressForm,
     ButtonBuilder,
   },
   setup() {
     const store = useStore()
     const location = ref(LOCATION);
+    const messages = ref([]);
     return {
       location,
       isValid: computed(() => store.getters['formBuilder/isValid']),
       isSubmitting: computed(() => store.getters['formBuilder/isSubmitting']),
       inputClass: "custom-form-group mb-4",
+      messages,
+      onSubmit: (formValues) => {
+        store.dispatch("formBuilder/isSubmitting", true);
+        console.log(formValues)
+
+        // TODO: send formValues to server
+        setTimeout(() => {
+          store.dispatch("formBuilder/isSubmitting", false);
+          store.dispatch("formBuilder/isSubmited", true);
+          messages.value = [{ type: "success", value: "Form Submitted" }];
+        }, 1000);
+      }
     };
   },
 };
@@ -53,6 +69,13 @@ export default {
 .custom-form .custom-form-group.--error > textarea {
   border: 1px solid red;
   box-shadow: 0px 0px 5px 0px rgb(255 0 0);
+}
+
+.custom-form .custom-form-group.--warning > input,
+.custom-form .custom-form-group.--warning > select,
+.custom-form .custom-form-group.--warning > textarea {
+  border: 1px solid #ffc107;
+  box-shadow: 0px 0px 5px 0px #ffc107;
 }
 </style>
 

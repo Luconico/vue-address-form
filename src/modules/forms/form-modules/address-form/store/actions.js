@@ -17,9 +17,8 @@ export const getCountrySelect = async ({ commit }, country) => {
             select: 'country',
             translate: true,
             options: [
-                { value: 'UK' },
+                { value: 'EN' },
                 { value: 'DE' },
-                { value: 'AD' },
             ]
         }
     } // TODO: REQUEST FOR COUNTRIES
@@ -35,13 +34,20 @@ export const getProvinceSelect = async ({ commit }, country) => {
     const provinces = {
         ES: {
             select: 'province',
-            translate: true,
+            translate: false,
             options: [
-                { value: 'madrid' },
-                { value: 'barcelona' },
-                { value: 'malaga' },
-                { value: 'valencia' },
-                { value: 'sevilla' },
+                { value: 'Madrid' },
+                { value: 'Barcelona' },
+                { value: 'Málaga' },
+                { value: 'Valencia' },
+                { value: 'Sevilla' },
+                { value: 'Córdoba' },
+                { value: 'Alicante' },
+                { value: 'Granada' },
+                { value: 'Huelva' },
+                { value: 'Almería' },
+                { value: 'Cádiz' },
+                { value: 'Jaén' },
             ]
         }
     } // TODO: REQUEST FOR PROVINCES
@@ -63,34 +69,44 @@ export const getAddressForm = async ({ commit }, country) => {
                     active: true,
                     valid: false,
                     type: 'text',
+                    validationFunction: null,
+                    mask: null,
                 },
-                postalCode: {
+                zipCode: {
                     value: '',
                     validations: ['required', 'minLength:5', 'maxLength:5'],
                     active: true,
                     valid: false,
-                    type: 'text'
+                    type: 'text',
+                    validationFunction: null,
+                    mask: null,
                 },
                 city: {
                     value: '',
                     validations: ['required'],
                     active: true,
                     valid: false,
-                    type: 'text'
+                    type: 'text',
+                    validationFunction: null,
+                    mask: null,
                 },
                 province: {
                     value: '',
                     validations: ['required'],
                     active: true,
                     valid: false,
-                    type: 'select'
+                    type: 'text',
+                    validationFunction: null,
+                    mask: null,
                 },
                 moreInfo: {
                     value: '',
                     validations: [],
                     active: true,
                     valid: false,
-                    type: 'textarea'
+                    type: 'textarea',
+                    validationFunction: null,
+                    mask: null,
                 },
             }
         },
@@ -102,38 +118,48 @@ export const getAddressForm = async ({ commit }, country) => {
                     active: true,
                     valid: false,
                     type: 'text',
+                    validationFunction: null,
+                    mask: null,
                 },
-                postalCode: {
+                zipCode: {
                     value: '',
                     validations: ['required'],
                     active: true,
                     valid: false,
-                    type: 'text'
+                    type: 'text',
+                    validationFunction: null,
+                    mask: null,
                 },
                 city: {
                     value: '',
                     validations: ['required'],
                     active: false,
                     valid: false,
-                    type: 'text'
+                    type: 'text',
+                    validationFunction: null,
+                    mask: null,
                 },
                 province: {
                     value: '',
                     validations: [],
                     active: false,
                     valid: false,
-                    type: 'select'
+                    type: 'select',
+                    validationFunction: null,
+                    mask: null,
                 },
                 moreInfo: {
                     value: '',
                     validations: [],
                     active: true,
                     valid: false,
-                    type: 'textarea'
+                    type: 'textarea',
+                    validationFunction: null,
+                    mask: null,
                 },
             }
         },
-        AD: {
+        EN: {
             fields: {
                 address: {
                     value: '',
@@ -141,34 +167,44 @@ export const getAddressForm = async ({ commit }, country) => {
                     active: true,
                     valid: false,
                     type: 'text',
+                    validationFunction: null,
+                    mask: null,
                 },
-                postalCode: {
+                zipCode: {
                     value: '',
                     validations: ['required'],
                     active: true,
                     valid: false,
-                    type: 'text'
+                    type: 'text',
+                    validationFunction: null,
+                    mask: null,
                 },
                 city: {
                     value: '',
                     validations: ['required'],
                     active: true,
                     valid: false,
-                    type: 'text'
+                    type: 'text',
+                    validationFunction: null,
+                    mask: null,
                 },
                 province: {
                     value: '',
                     validations: ['required'],
                     active: false,
                     valid: false,
-                    type: 'select'
+                    type: 'select',
+                    validationFunction: null,
+                    mask: null,
                 },
                 moreInfo: {
                     value: '',
                     validations: [],
                     active: true,
                     valid: false,
-                    type: 'textarea'
+                    type: 'textarea',
+                    validationFunction: null,
+                    mask: null,
                 },
             }
         }
@@ -188,11 +224,11 @@ export const submit = async ({ commit }) => {
 }
 
 export const setCountry = async ({ commit }, country) => {
-    commit('setCountry', {country})
+    commit('setCountry', { country })
 }
 
 
-export const setIsValid = async ({ commit, dispatch }, {isValid, field}) => {
-    commit('setIsValid', {isValid, field})
-    dispatch('formBuilder/isValid', {}, {root: true})
+export const setIsValid = async ({ commit, dispatch }, { isValid, field }) => {
+    commit('setIsValid', { isValid, field })
+    dispatch('formBuilder/isValid', {}, { root: true })
 }

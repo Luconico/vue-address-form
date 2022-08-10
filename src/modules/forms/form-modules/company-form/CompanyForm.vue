@@ -9,7 +9,9 @@
       v-model="field.value"
       :name="index"
       :validations="field.validations"
-      :customClass="[customClass, {'--error': field.error}]"
+      :customClass="[customClass]"
+      :mask="field.mask"
+      :validationFunction="field.validationFunction"
       @onValidated="onValidated"
     />
   </template>

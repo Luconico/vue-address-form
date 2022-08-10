@@ -7,7 +7,7 @@
         <LoaderSpinner v-if="isValidating" color="gray" size="1rem" />
       </span>
       <div v-if="mask" class="masked-container">
-        <div class="masked-value">
+        <div class="masked-value" :class="{'masked-disabled': disabled}">
           {{ maskedValue }}
         </div>
       </div>
@@ -150,7 +150,7 @@ export default {
     },
     mask: {
       type: String,
-      default: '### ### ### ###',
+      default: null,
     },
   },
   setup(props, context) {
@@ -160,14 +160,29 @@ export default {
     const isValidating = ref(false);
     const errorMessage = ref(null);
 
-    const validationDebounce = ref(null);
-
     const isFocus = ref(false);
 
     watch(() => props.modelValue, (newValue) => {
+        context.emit("onValidated", { isValid: false, field: props.name,  });
         handleSuggestions(newValue);
         hadleCommonValidations(newValue);
     });
+
+    const hadleCommonValidations = (newValue) => {
+      if (props.validations.length < 1) return;
+      errorMessage.value = checkValidations(newValue, props.validations);
+      if (!props.validationFunction) context.emit("onValidated", { isValid: (!errorMessage.value), field: props.name,  });
+    };
+
+    const handleCustomValidation = async () => {
+      if (!props.validationFunction) return;
+      isValidating.value = true;
+      errorMessage.value = await props.validationFunction(props.modelValue);
+      isValidating.value = false;
+      const isValid = (!errorMessage.value || errorMessage.value && errorMessage.value.msgType === 'warning');
+      context.emit("onValidated", { isValid, field: props.name,  });
+    }
+
 
     const handleSuggestions = (newValue) => {
       if (props.type !== "text" || !props.options) return;
@@ -185,24 +200,6 @@ export default {
         .slice(0, 3)
         .sort();
     };
-
-    const hadleCommonValidations = (newValue) => {
-      if (props.validations.length < 1) return;
-      clearTimeout(validationDebounce.value)
-      validationDebounce.value = setTimeout(() => {
-        errorMessage.value = checkValidations(newValue, props.validations);
-        context.emit("onValidated", { isValid: (!errorMessage.value), field: props.name,  });
-      }, 400)
-    };
-
-    const handleCustomValidation = async () => {
-      if (!props.validationFunction) return;
-      isValidating.value = true;
-      errorMessage.value = await props.validationFunction(props.modelValue);
-      isValidating.value = false;
-      context.emit("onValidated", { isValid: (!errorMessage.value), field: props.name,  });
-    }
-
 
     return {
       filteredValues,

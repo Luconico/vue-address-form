@@ -8,6 +8,8 @@ export default () => ({
                 active: true,
                 valid: false,
                 type: 'text',
+                validationFunction: null,
+                mask: null,
             },
             cif: {
                 value: '',
@@ -15,6 +17,12 @@ export default () => ({
                 active: true,
                 valid: false,
                 type: 'text',
+                validationFunction: (dni) => {
+                    if (dni.length !== 9) {
+                        return { msgType: 'warning', value: 'El CIF suele tener 9 dígitos' };
+                    }
+                },
+                mask: 'XXXXXXXX-A*',
             }
         }
     },

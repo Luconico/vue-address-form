@@ -2,7 +2,7 @@ import { computed, onBeforeMount, onMounted, ref, watch } from 'vue';
 import addressFormModule from '../store';
 import { useStore } from 'vuex'
 
-const useAddressForm = () => {
+const useAddressForm = (props) => {
 
   const store = useStore()
   const country = ref('')
@@ -14,7 +14,8 @@ const useAddressForm = () => {
 
   // TODO: GET EXISTING ADDRESS TO EDIT (IF ANY) AND SET IT
   onMounted(() => {
-    store.dispatch('addressForm/getCountrySelect', window.location.pathname.split('/')[1])
+    country.value = props.location.toUpperCase()
+    store.dispatch('addressForm/getCountrySelect', props.location)
   })
 
   watch(country, (currentValue) => {

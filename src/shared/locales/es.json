@@ -3,7 +3,7 @@
   "cif": "DNI o CIF", 
   "country": "País",
   "address": "Dirección",
-  "postalCode": "Código postal",
+  "zipCode": "Código postal",
   "city": "Ciudad",
   "province": "Provincia",
   "moreInfo": "Información adicional",
@@ -13,17 +13,7 @@
       "DE": "Alemania", 
       "AD": "Andorra",
       "FR": "Francia",
-      "UK": "Reino Unido"
-    },
-    "province": {
-      "madrid": "Madrid",
-      "barcelona": "Barcelona",
-      "valencia": "Valencia",
-      "sevilla": "Sevilla",
-      "caceres": "Caceres",
-      "jaen": "Jaen",
-      "malaga": "Málaga",
-      "cadiz": "Cádiz"
+      "EN": "Reino Unido"
     }
   },
   "msg": {
