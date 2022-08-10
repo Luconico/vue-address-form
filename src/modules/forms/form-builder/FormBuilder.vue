@@ -123,7 +123,7 @@ textarea:focus-visible {
   pointer-events: none;
   top: 2px;
   left: 4px;
-  width: 100%;
+  width: 95%;
   background-color: #fff;
   overflow: hidden;
   z-index: 1;
