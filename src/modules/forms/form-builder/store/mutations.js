@@ -15,3 +15,7 @@ export const setSubmited = (state, { submited }) => {
 export const setPressentModules = (state, { pressentModule }) => {
     state.pressentModules = [...state.pressentModules, pressentModule]
 }
+
+export const setInitialValues = (state, { initialValues }) => {
+    state.initialValues = initialValues
+}

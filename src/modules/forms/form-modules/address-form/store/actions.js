@@ -219,16 +219,16 @@ export const getAddressForm = async ({ commit }, country) => {
 }
 
 
-export const submit = async ({ commit }) => {
+export const submit = ({ commit }) => {
     commit('setFormValues')
 }
 
-export const setCountry = async ({ commit }, country) => {
+export const setCountry = ({ commit }, country) => {
     commit('setCountry', { country })
 }
 
 
-export const setIsValid = async ({ commit, dispatch }, { isValid, field }) => {
+export const setIsValid = ({ commit, dispatch }, { isValid, field }) => {
     commit('setIsValid', { isValid, field })
     dispatch('formBuilder/isValid', {}, { root: true })
 }

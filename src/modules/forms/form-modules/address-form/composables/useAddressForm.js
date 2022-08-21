@@ -13,7 +13,7 @@ const useAddressForm = (props) => {
   })
 
   // TODO: GET EXISTING ADDRESS TO EDIT (IF ANY) AND SET IT
-  onMounted(() => {
+  onMounted(async () => {
     country.value = props.location.toUpperCase()
     store.dispatch('addressForm/getCountrySelect', props.location)
   })

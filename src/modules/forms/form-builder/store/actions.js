@@ -16,3 +16,7 @@ export const isSubmited = ({ commit }, submited) => {
 export const pressentModule = ({ commit }, pressentModule) => {
     commit('setPressentModules', { pressentModule })
 }
+
+export const initialValues = ({ commit}, initialValues) => {
+    commit('setInitialValues', { initialValues })
+}
