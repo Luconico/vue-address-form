@@ -20,6 +20,7 @@
     "required": "Este campo es requerido",
     "minLength": "Este campo debe tener al menos {minLength} caracteres",
     "maxLength": "Este campo no puede tener más de {maxLength} caracteres",
+    "nifNotValid": "El CIF o DNI no es válido",
     "addressSaved": "Dirección guardada"
   },
   "buttons": {

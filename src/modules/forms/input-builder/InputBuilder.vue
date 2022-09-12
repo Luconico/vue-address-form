@@ -98,7 +98,7 @@
 import LoaderSpinner from "@/shared/loader-spinner/LoaderSpinner.vue";
 import { computed, ref, watch } from "@vue/runtime-core";
 import { useI18n } from "vue-i18n";
-import { checkValidations } from '../helpers/validation-utils';
+import { checkCommonValidations, checkCustomValidation } from '../helpers/validation-utils';
  import { mask } from 'maska'
 export default {
   components: { LoaderSpinner },
@@ -145,7 +145,7 @@ export default {
       default: () => [],
     },
     validationFunction: {
-      type: Function,
+      type: String,
       default: null,
     },
     mask: {
@@ -170,14 +170,14 @@ export default {
 
     const hadleCommonValidations = (newValue) => {
       if (props.validations.length < 1) return;
-      errorMessage.value = checkValidations(newValue, props.validations);
+      errorMessage.value = checkCommonValidations(newValue, props.validations);
       if (!props.validationFunction) context.emit("onValidated", { isValid: (!errorMessage.value), field: props.name,  });
     };
 
     const handleCustomValidation = async () => {
       if (!props.validationFunction) return;
       isValidating.value = true;
-      errorMessage.value = await props.validationFunction(props.modelValue);
+      errorMessage.value = await checkCustomValidation(props.modelValue, props.validationFunction);
       isValidating.value = false;
       const isValid = (!errorMessage.value || errorMessage.value && errorMessage.value.msgType === 'warning');
       context.emit("onValidated", { isValid, field: props.name,  });

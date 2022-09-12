@@ -18,6 +18,7 @@
     "required": "This field is required",
     "minLength": "This field must be at least {0} characters long",
     "maxLength": "This field must be at most {0} characters long",
+    "nifNotValid": "Your ID is not valid",
     "addressSaved": "Address saved"
   },
   "buttons": {

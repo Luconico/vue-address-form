@@ -1,5 +1,5 @@
 
-export const checkValidations = (value, validations) => {
+export const checkCommonValidations = (value, validations) => {
     if (validations.includes('required') && value.length === 0) {
         return { msgType: 'error', value: `msg.required`, options: {} }
     }
@@ -17,3 +17,22 @@ export const checkValidations = (value, validations) => {
     }
 }
 
+export const checkCustomValidation = (value, validationName) => {
+    return customValidations[validationName](value)
+}
+
+
+const customValidations = {
+    nifSpain: (validationName) => {
+        const nifPattern = /^[0-9]{8}[a-zA-Z]$/
+        if (!nifPattern.test(validationName)) return { msgType: 'error', value: `msg.nifNotValid` }
+    },
+    nifGermany: (validationName) => {
+        const nifPattern = /^[0-9]{9}$/
+        if (!nifPattern.test(validationName)) return { msgType: 'error', value: `msg.nifNotValid` }
+    },
+    nifFrance: (validationName) => {
+        const nifPattern = /^[0-9]{11}$/
+        if (!nifPattern.test(validationName)) return { msgType: 'error', value: `msg.nifNotValid` }
+    }
+}

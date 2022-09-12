@@ -17,11 +17,7 @@ export default () => ({
                 active: true,
                 valid: false,
                 type: 'text',
-                validationFunction: (dni) => {
-                    if (dni.length !== 9) {
-                        return { msgType: 'warning', value: 'El CIF suele tener 9 dígitos' };
-                    }
-                },
+                validationFunction: 'nifSpain',
                 mask: 'XXXXXXXX-A*',
             }
         }
