@@ -1,7 +1,11 @@
 <template>
-  <FormBuilder :customClass="{ 'custom-form': true }" @onSubmit="onSubmit" :messages="messages">
+  <FormBuilder
+    :customClass="{ 'custom-form': true }"
+    @onSubmit="onSubmit"
+    :messages="messages"
+  >
     <CompanyForm :customClass="inputClass" />
-    <AddressForm :customClass="inputClass" :location="location"/>
+    <AddressForm :customClass="inputClass" :location="location" />
     <ButtonBuilder
       :type="'submit'"
       :isSubmitting="isSubmitting"
@@ -19,9 +23,10 @@ import CompanyForm from "@/modules/forms/form-modules/company-form/CompanyForm.v
 
 import { ref } from "@vue/reactivity";
 import { LOCATION } from "./global";
-import { useStore } from 'vuex';
-import { computed } from '@vue/runtime-core';
-import AddressForm from '@/modules/forms/form-modules/address-form/AddressForm.vue';
+import { useStore } from "vuex";
+import { computed, onMounted } from "@vue/runtime-core";
+import AddressForm from "@/modules/forms/form-modules/address-form/AddressForm.vue";
+import nestApi from "@/api/nestApi";
 
 export default {
   name: "address-form",
@@ -32,26 +37,42 @@ export default {
     ButtonBuilder,
   },
   setup() {
-    const store = useStore()
+    const store = useStore();
     const location = ref(LOCATION);
     const messages = ref([]);
+
+    onMounted(() => {
+      const initialValues = {
+        country: "EN",
+        address: "prueba",
+      };
+      store.dispatch("formBuilder/initialValues", initialValues);
+    });
+
     return {
       location,
-      isValid: computed(() => store.getters['formBuilder/isValid']),
-      isSubmitting: computed(() => store.getters['formBuilder/isSubmitting']),
+      isValid: computed(() => store.getters["formBuilder/isValid"]),
+      isSubmitting: computed(() => store.getters["formBuilder/isSubmitting"]),
       inputClass: "custom-form-group mb-4",
       messages,
       onSubmit: (formValues) => {
         store.dispatch("formBuilder/isSubmitting", true);
-        console.log(formValues)
+        console.log(formValues);
 
-        // TODO: send formValues to server
-        setTimeout(() => {
-          store.dispatch("formBuilder/isSubmitting", false);
-          store.dispatch("formBuilder/isSubmited", true);
-          messages.value = [{ type: "success", value: "Form Submitted" }];
-        }, 1000);
-      }
+        nestApi
+          .post("/address", formValues)
+          .then((response) => {
+            console.log(response);
+            store.dispatch("formBuilder/isSubmitting", false);
+            store.dispatch("formBuilder/isSubmited", true);
+            messages.value = [{ type: "success", value: "Form Submitted" }];
+          })
+          .catch((error) => {
+            console.log(error);
+            store.dispatch("formBuilder/isSubmitting", false);
+            messages.value = [{ type: "error", value: "Error" }];
+          });
+      },
     };
   },
 };
