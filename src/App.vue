@@ -65,12 +65,12 @@ export default {
             console.log(response);
             store.dispatch("formBuilder/isSubmitting", false);
             store.dispatch("formBuilder/isSubmited", true);
-            messages.value = [{ type: "success", value: "Form Submitted" }];
+            messages.value = [{ msgType: "success", value: "Form Submitted" }];
           })
           .catch((error) => {
             console.log(error);
             store.dispatch("formBuilder/isSubmitting", false);
-            messages.value = [{ type: "error", value: "Error" }];
+            messages.value = [{ msgType: "error", value: "Error" }];
           });
       },
     };
