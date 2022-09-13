@@ -26,7 +26,7 @@ import { LOCATION } from "./global";
 import { useStore } from "vuex";
 import { computed, onMounted } from "@vue/runtime-core";
 import AddressForm from "@/modules/forms/form-modules/address-form/AddressForm.vue";
-import nestApi from "@/api/nestApi";
+import dtxApi from "@/api/dtxApi";
 
 export default {
   name: "address-form",
@@ -59,7 +59,7 @@ export default {
         store.dispatch("formBuilder/isSubmitting", true);
         console.log(formValues);
 
-        nestApi
+        dtxApi
           .post("/address", formValues)
           .then((response) => {
             console.log(response);

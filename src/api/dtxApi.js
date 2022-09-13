@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const nestApi = axios.create({
+const dtxApi = axios.create({
     baseURL: 'http://localhost:5000/api',
 })
 
-export default nestApi;
+export default dtxApi;
