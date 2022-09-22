@@ -4,5 +4,5 @@ export default () => ({
     isValid: false,
     submited: false,
     pressentModules: [],
-    initialValues: {},
+    initialValues: null,
 })
