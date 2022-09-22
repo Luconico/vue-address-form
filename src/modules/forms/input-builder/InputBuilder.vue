@@ -57,6 +57,8 @@
         :name="name"
         :value="modelValue"
         @input="updateValue"
+        @focus="onFocus(true)"
+        @blur="onFocus(false)"
         :disabled="disabled"
       >
         <option v-if="!options"></option>
@@ -88,6 +90,8 @@
         :type="type"
         :value="modelValue"
         @input="updateValue"
+        @focus="onFocus(true)"
+        @blur="onFocus(false)"
         :disabled="disabled"
       />
     </div>
