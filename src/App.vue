@@ -24,9 +24,9 @@ import CompanyForm from "@/modules/forms/form-modules/company-form/CompanyForm.v
 import { ref } from "@vue/reactivity";
 import { LOCATION } from "./global";
 import { useStore } from "vuex";
-import { computed, onMounted } from "@vue/runtime-core";
+import { computed, onBeforeMount } from "@vue/runtime-core";
 import AddressForm from "@/modules/forms/form-modules/address-form/AddressForm.vue";
-import nestApi from "@/api/nestApi";
+import dtxApi from "@/api/dtxApi";
 
 export default {
   name: "address-form",
@@ -41,9 +41,9 @@ export default {
     const location = ref(LOCATION);
     const messages = ref([]);
 
-    onMounted(() => {
+    onBeforeMount(() => {
       const initialValues = {
-        country: "EN",
+        country: "ES",
         address: "prueba",
       };
       store.dispatch("formBuilder/initialValues", initialValues);
@@ -59,7 +59,7 @@ export default {
         store.dispatch("formBuilder/isSubmitting", true);
         console.log(formValues);
 
-        nestApi
+        dtxApi
           .post("/address", formValues)
           .then((response) => {
             console.log(response);

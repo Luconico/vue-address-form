@@ -4,4 +4,3 @@ export const getCleanFormValues = (fields) => {
     Object.keys(fields).forEach((key) => { if (fields[key].active) formValues[key] = fields[key].value })
     return formValues
 }
-

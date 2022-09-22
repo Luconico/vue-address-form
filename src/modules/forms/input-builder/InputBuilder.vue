@@ -96,10 +96,11 @@
 
 <script>
 import LoaderSpinner from "@/shared/loader-spinner/LoaderSpinner.vue";
-import { computed, ref, watch } from "@vue/runtime-core";
+import { computed, onMounted, ref, watch } from "@vue/runtime-core";
 import { useI18n } from "vue-i18n";
 import { checkCommonValidations, checkCustomValidation } from '../helpers/validation-utils';
  import { mask } from 'maska'
+import { useStore } from 'vuex';
 export default {
   components: { LoaderSpinner },
   name: "InputBuilder",
@@ -159,13 +160,20 @@ export default {
 
     const isValidating = ref(false);
     const errorMessage = ref(null);
-
+    const userHasEntered = ref(false);
     const isFocus = ref(false);
+
+    const store = useStore();
+
+    onMounted(() => {
+        checkAndSetInitialValues()
+    });
 
     watch(() => props.modelValue, (newValue) => {
         context.emit("onValidated", { isValid: false, field: props.name,  });
         handleSuggestions(newValue);
         hadleCommonValidations(newValue);
+        checkAndSetInitialValues()
     });
 
     const hadleCommonValidations = (newValue) => {
@@ -201,6 +209,13 @@ export default {
         .sort();
     };
 
+    const checkAndSetInitialValues = () => {
+      if (userHasEntered.value) return;
+      if (!store.getters['formBuilder/initialValues']) return
+      if (!store.getters['formBuilder/initialValues'][props.name]) return
+      context.emit('update:modelValue', store.getters['formBuilder/initialValues'][props.name])
+    }
+
     return {
       filteredValues,
       isValidating,
@@ -208,6 +223,7 @@ export default {
       isFocus,
       maskedValue: computed(() => mask(props.modelValue, props.mask)),
       onFocus(value) {
+        userHasEntered.value = true;
         setTimeout(() => {
           isFocus.value = value;
         }, 100);

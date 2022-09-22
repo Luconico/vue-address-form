@@ -8,9 +8,8 @@
 <script>
 import { ref } from "vue";
 import AlertMessages from "@/shared/alert-message/AlertMessages.vue";
-import { onBeforeMount, onMounted } from "@vue/runtime-core";
+import {  onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
-import formBuilderModule from "./store";
 export default {
   name: "FormBuilder",
   components: {
@@ -34,8 +33,6 @@ export default {
   setup(props, { slots, emit }) {
     const store = useStore();
     const formValues = ref({});
-
-    onBeforeMount(() => store.registerModule("formBuilder", formBuilderModule));
 
     onMounted(() => {
       registerFormModules();
