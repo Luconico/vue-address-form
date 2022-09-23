@@ -19,6 +19,7 @@
         @focus="onFocus(true)"
         @blur="onFocus(false)"
         :disabled="disabled"
+        v-maska="pattern"
       />
       <div class="suggestions-container">
         <div
@@ -154,6 +155,10 @@ export default {
       default: null,
     },
     mask: {
+      type: String,
+      default: null,
+    },
+    pattern: {
       type: String,
       default: null,
     },

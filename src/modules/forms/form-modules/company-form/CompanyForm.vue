@@ -13,6 +13,7 @@
       :mask="field.mask"
       :validationFunction="field.validationFunction"
       @onValidated="onValidated"
+      :pattern="field.pattern"
     />
   </template>
 </template>

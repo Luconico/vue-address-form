@@ -10,6 +10,7 @@ export default () => ({
                 type: 'text',
                 validationFunction: null,
                 mask: null,
+                pattern: null,
             },
             cif: {
                 value: '',
@@ -19,6 +20,7 @@ export default () => ({
                 type: 'text',
                 validationFunction: 'nifSpain',
                 mask: 'XXXXXXXX-A*',
+                pattern: '########A',
             }
         }
     },
