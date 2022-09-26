@@ -113,7 +113,7 @@ textarea:focus-visible {
 .masked-value {
   position: absolute;
   pointer-events: none;
-  top: 2px;
+  top: 4px;
   left: 2px;
   width: 95%;
   background-color: #fff;
