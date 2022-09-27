@@ -8,8 +8,9 @@
 <script>
 import { ref } from "vue";
 import AlertMessages from "@/shared/alert-message/AlertMessages.vue";
-import {  onMounted } from "@vue/runtime-core";
+import {  onBeforeMount, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
+import dtxApi from "@/api/dtxApi";
 export default {
   name: "FormBuilder",
   components: {
@@ -25,14 +26,31 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    messages: {
-      type: Array,
-      default: () => ([]),
+    initialValues: {
+      type: Object,
+      default: null,
+    },
+    url: {
+      type: String,
+      default: null,
+    },
+    successMessage: {
+      type: String,
+      default: 'Form submitted successfully',
+    },
+    errorMessage: {
+      type: String,
+      default: 'Error submitting form',
     },
   },
   setup(props, { slots, emit }) {
     const store = useStore();
     const formValues = ref({});
+    const messages = ref([]);
+
+    onBeforeMount(() => {
+      if (props.initialValues) store.dispatch("formBuilder/initialValues", props.initialValues)
+    });
 
     onMounted(() => {
       registerFormModules();
@@ -46,6 +64,7 @@ export default {
     };
 
     return {
+      messages,
       onSumbit: () => {
         formValues.value = {};
   
@@ -54,6 +73,22 @@ export default {
           const { fields } = store.getters[`${module}Form/formValues`];
           formValues.value = { ...formValues.value, ...fields };
         });
+
+        store.dispatch("formBuilder/isSubmitting", true);
+        console.log(formValues);
+        dtxApi
+          .post(props.url, formValues)
+          .then((response) => {
+            console.log(response);
+            store.dispatch("formBuilder/isSubmitting", false);
+            store.dispatch("formBuilder/isSubmited", true);
+            messages.value = [{ msgType: "success", value: props.successMessage }];
+          })
+          .catch((error) => {
+            console.log(error);
+            store.dispatch("formBuilder/isSubmitting", false);
+            messages.value = [{ msgType: "error", value: props.errorMessage }];
+          });
 
         emit("onSubmit", formValues.value);
       },

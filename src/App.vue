@@ -2,7 +2,8 @@
   <FormBuilder
     :customClass="{ 'custom-form': true }"
     @onSubmit="onSubmit"
-    :messages="messages"
+    :initialValues="initialValues"
+    :url="url"
   >
     <CompanyForm :customClass="inputClass" />
     <AddressForm :customClass="inputClass" :location="location" />
@@ -18,15 +19,13 @@
 <script>
 import FormBuilder from "@/modules/forms/form-builder/FormBuilder.vue";
 import ButtonBuilder from "@/shared/buttons/ButtonBuilder.vue";
-
 import CompanyForm from "@/modules/forms/form-modules/company-form/CompanyForm.vue";
 
 import { ref } from "@vue/reactivity";
 import { LOCATION } from "./global";
 import { useStore } from "vuex";
-import { computed, onBeforeMount } from "@vue/runtime-core";
+import { computed } from "@vue/runtime-core";
 import AddressForm from "@/modules/forms/form-modules/address-form/AddressForm.vue";
-import dtxApi from "@/api/dtxApi";
 
 export default {
   name: "address-form",
@@ -39,39 +38,21 @@ export default {
   setup() {
     const store = useStore();
     const location = ref(LOCATION);
-    const messages = ref([]);
 
-    onBeforeMount(() => {
-      const initialValues = {
-        country: "ES",
-        address: "prueba",
-      };
-      store.dispatch("formBuilder/initialValues", initialValues);
-    });
+    const initialValues = {
+      country: "ES",
+      address: "prueba",
+    };
 
     return {
       location,
+      initialValues,
+      url: "/address",
       isValid: computed(() => store.getters["formBuilder/isValid"]),
       isSubmitting: computed(() => store.getters["formBuilder/isSubmitting"]),
       inputClass: "custom-form-group mb-4",
-      messages,
       onSubmit: (formValues) => {
-        store.dispatch("formBuilder/isSubmitting", true);
         console.log(formValues);
-
-        dtxApi
-          .post("/address", formValues)
-          .then((response) => {
-            console.log(response);
-            store.dispatch("formBuilder/isSubmitting", false);
-            store.dispatch("formBuilder/isSubmited", true);
-            messages.value = [{ msgType: "success", value: "Form Submitted" }];
-          })
-          .catch((error) => {
-            console.log(error);
-            store.dispatch("formBuilder/isSubmitting", false);
-            messages.value = [{ msgType: "error", value: "Error" }];
-          });
       },
     };
   },
