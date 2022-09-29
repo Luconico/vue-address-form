@@ -83,14 +83,14 @@ export default {
             store.dispatch("formBuilder/isSubmitting", false);
             store.dispatch("formBuilder/isSubmited", true);
             messages.value = [{ msgType: "success", value: props.successMessage }];
+            emit("onSubmit", {ok: true, data: response.data});
           })
           .catch((error) => {
             console.log(error);
             store.dispatch("formBuilder/isSubmitting", false);
             messages.value = [{ msgType: "error", value: props.errorMessage }];
+            emit("onSubmit", {ok: false, data: error});
           });
-
-        emit("onSubmit", formValues.value);
       },
     };
   },
