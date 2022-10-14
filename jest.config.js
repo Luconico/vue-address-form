@@ -3,6 +3,6 @@ module.exports = {
     transform: {
       '^.+\\.vue$': 'vue3-jest'
     },
-    
+    // setupFiles: ['<rootDir>/src/tests/common/jest-init.js'],
   }
   

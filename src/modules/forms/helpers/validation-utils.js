@@ -23,16 +23,16 @@ export const checkCustomValidation = (value, validationName) => {
 
 
 const customValidations = {
-    nifSpain: (validationName) => {
+    nifSpain: (value) => {
         const nifPattern = /^[0-9]{8}[a-zA-Z]$/
-        if (!nifPattern.test(validationName)) return { msgType: 'error', value: `msg.nifNotValid` }
+        if (!nifPattern.test(value)) return { msgType: 'error', value: `msg.nifNotValid` }
     },
-    nifGermany: (validationName) => {
+    nifGermany: (value) => {
         const nifPattern = /^[0-9]{9}$/
-        if (!nifPattern.test(validationName)) return { msgType: 'error', value: `msg.nifNotValid` }
+        if (!nifPattern.test(value)) return { msgType: 'error', value: `msg.nifNotValid` }
     },
-    nifFrance: (validationName) => {
+    nifFrance: (value) => {
         const nifPattern = /^[0-9]{11}$/
-        if (!nifPattern.test(validationName)) return { msgType: 'error', value: `msg.nifNotValid` }
+        if (!nifPattern.test(value)) return { msgType: 'error', value: `msg.nifNotValid` }
     }
 }
