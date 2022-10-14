@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputBuilder.vue should match whit snapshot 1`] = `
+<div class="test"><span>test <span title="msg.required">*</span>
+  <!--v-if--></span>
+  <div class="masked-container">
+    <div class="masked-value">TEST</div>
+  </div><input name="test" type="text">
+  <div class="suggestions-container">
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>
+`;
