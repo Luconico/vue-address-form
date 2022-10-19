@@ -103,8 +103,6 @@ describe('InputBuilder.vue', () => {
     await input.trigger('focus');
     await input.setValue('Lor');
     expect(wrapper.emitted('update:modelValue')).toBeTruthy()
-    console.log(wrapper.vm.modelValue);
-    console.log(wrapper.vm.filteredValues)
     expect(wrapper.vm.filteredValues).toBeTruthy();
   });
 
