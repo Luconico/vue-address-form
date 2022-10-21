@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AlertMessage.vue renders props when passed 1`] = `
+exports[`AlertMessage.vue Should match whit snapshot 1`] = `
 <div class="alert-container alert--success">
   <div class="alert__icon fa fa-lg fa-check"></div><span class="alert__message">test</span>
 </div>
