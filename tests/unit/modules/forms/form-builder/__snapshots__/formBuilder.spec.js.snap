@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormBuilder.vue should match with snapshot 1`] = `
+<!--v-if-->
+<form id="testId" class="custom-form">
+  <div class=""><span>companyName <span title="msg.required">*</span>
+    <!--v-if--></span>
+    <!--v-if--><input name="companyName" type="text">
+    <div class="suggestions-container">
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+  <div class=""><span>cif <span title="msg.required">*</span>
+    <!--v-if--></span>
+    <div class="masked-container">
+      <div class="masked-value">test</div>
+    </div><input name="cif" type="text">
+    <div class="suggestions-container">
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+  </div>
+</form>
+`;
