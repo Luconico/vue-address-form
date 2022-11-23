@@ -10,7 +10,7 @@ import { ref } from "vue";
 import AlertMessages from "@/shared/alert-message/AlertMessages.vue";
 import {  onBeforeMount, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
-import dtxApi from "@/api/dtxApi";
+import fcsApi from "@/api/fcsApi";
 export default {
   name: "FormBuilder",
   components: {
@@ -76,7 +76,7 @@ export default {
 
         store.dispatch("formBuilder/isSubmitting", true);
         console.log(formValues);
-        dtxApi
+        fcsApi
           .post(props.url, formValues)
           .then((response) => {
             console.log(response);
