@@ -1,9 +1,9 @@
 <template>
   <template v-if="type === 'text'">
     <div :class="[customClass,{'--error': isError, '--warning': isWarning}]">
-      <span
+      <span class="input-label"
         >{{ label }}
-        <span :title="$t('msg.required')" v-if="required">*</span>
+        <span class="required-field" :title="$t('msg.required')" v-if="required">*</span>
         <LoaderSpinner v-if="isValidating" color="gray" size="1rem" />
       </span>
       <div v-if="mask" class="masked-container">
@@ -50,8 +50,8 @@
 
   <template v-else-if="type === 'select'">
     <div :class="customClass">
-      <span
-        >{{ label }} <span :title="$t('msg.required')" v-if="required">*</span
+      <span class="input-label"
+        >{{ label }} <span class="required-field" :title="$t('msg.required')" v-if="required">*</span
         ><LoaderSpinner v-if="!options" color="gray" size="1rem" />
       </span>
       <select
@@ -82,9 +82,9 @@
 
   <template v-else-if="type === 'textarea'">
     <div :class="customClass">
-      <span
+      <span class="input-label"
         >{{ label }}
-        <span :title="$t('msg.required')" v-if="required">*</span></span
+        <span :title="$t('msg.required')" class="required-field" v-if="required">*</span></span
       >
       <textarea
         :name="name"
@@ -254,5 +254,26 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.input-label {
+  font-weight: 700;
+}
+
+.required-field {
+  color: orange;
+}
+
+select {
+  height: 36px;
+  padding-bottom: 5px;
+}
+
+input, select, textarea {
+  border: 1px solid #e0e0e0;
+}
+
+input {
+  padding: 5px;
+}
 </style>

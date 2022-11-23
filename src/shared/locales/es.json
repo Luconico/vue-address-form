@@ -1,6 +1,8 @@
 {
-  "companyName": "Empresa",
-  "cif": "DNI o CIF", 
+  "companyName": "Nombre o Empresa",
+  "cif": "Número de identificación fiscal", 
+  "colegiate": "Número de colegiado",
+  "phone": "Teléfono",
   "country": "País",
   "address": "Dirección",
   "zipCode": "Código postal",

@@ -24,7 +24,7 @@ export default {
     },
     customClass: {
       type: Object,
-      default: () => ([]),
+      default: () => ({}),
     },
     initialValues: {
       type: Object,

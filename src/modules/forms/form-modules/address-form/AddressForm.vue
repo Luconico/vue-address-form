@@ -1,31 +1,35 @@
 <template>
-  <InputBuilder
-    type="select"
-    :label="$t('country')"
-    :required="true"
-    v-model="country"
-    :disabled="isDisabled"
-    :name="'country'"
-    :options="selectOptions['country'] ? selectOptions['country'].value : null"
-    :customClass="[customClass]"
-  />
-  <template v-for="(field, index) in addressForm.fields" :key="index">
+  <div class="address-container">
     <InputBuilder
-      v-if="field.active"
-      :type="field.type"
-      :disabled="isDisabled || isFetching"
-      :label="$t(index)"
-      :required="field.validations.includes('required')"
-      v-model="field.value"
-      :name="index"
-      :options="selectOptions[index] ? selectOptions[index].value : null"
-      :validations="field.validations"
+      type="select"
+      :label="$t('country')"
+      :required="true"
+      v-model="country"
+      :disabled="isDisabled"
+      :name="'country'"
+      :options="
+        selectOptions['country'] ? selectOptions['country'].value : null
+      "
       :customClass="[customClass]"
-      :mask="field.mask"
-      :validationFunction="field.validationFunction"
-      @onValidated="onValidated"
     />
-  </template>
+    <template v-for="(field, index) in addressForm.fields" :key="index">
+      <InputBuilder
+        v-if="field.active"
+        :type="field.type"
+        :disabled="isDisabled || isFetching"
+        :label="$t(index)"
+        :required="field.validations.includes('required')"
+        v-model="field.value"
+        :name="index"
+        :options="selectOptions[index] ? selectOptions[index].value : null"
+        :validations="field.validations"
+        :customClass="[customClass, index]"
+        :mask="field.mask"
+        :validationFunction="field.validationFunction"
+        @onValidated="onValidated"
+      />
+    </template>
+  </div>
 </template>
 
 <script>
@@ -70,4 +74,23 @@ export default {
 </script>
 
 <style>
+.address-container {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  position: relative;
+  margin: 1em 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:  space-between;
+}
+
+.address-container > div {
+  width: 100%;
+}
+
+.address-container .zipCode,
+.address-container .city,
+.address-container .province {
+  width: 31%;
+}
 </style>

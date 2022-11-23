@@ -12,6 +12,16 @@ export default () => ({
                 mask: null,
                 pattern: null,
             },
+            phone: {
+                value: '',
+                validations: ['required'],
+                active: true,
+                valid: false,
+                type: 'text',
+                validationFunction: null,
+                mask: null,
+                pattern: null,
+            },
             cif: {
                 value: '',
                 validations: ['required'],
@@ -21,7 +31,17 @@ export default () => ({
                 validationFunction: 'nifSpain',
                 mask: 'XXXXXXXX-A*',
                 pattern: '########A',
-            }
+            },
+            colegiate: {
+                value: '',
+                validations: [],
+                active: true,
+                valid: false,
+                type: 'text',
+                validationFunction: null,
+                mask: null,
+                pattern: null,
+            },
         }
     },
     isValid: false,
