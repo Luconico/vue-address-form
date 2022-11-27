@@ -9,7 +9,7 @@ export const selectOptions = (state) => (term = '') => {
 }
 
 export const form = (state) => {
-    return state.companyForm
+    return state.billingForm
 }
 
 

@@ -1,7 +1,14 @@
 import axios from 'axios';
 
-const dtxApi = axios.create({
-    baseURL: 'http://localhost:5000/api',
-})
+axios.defaults.withCredentials = true;
+
+const dtxApi = (method, url, data, headers) => {
+    return axios(url,{
+        method,
+        data,
+        headers
+    }
+    );
+}
 
 export default dtxApi;

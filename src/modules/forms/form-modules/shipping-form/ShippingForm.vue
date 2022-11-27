@@ -1,5 +1,5 @@
 <template>
-  <template v-for="(field, index) in companyForm.fields" :key="index">
+  <template v-for="(field, index) in shippingForm.fields" :key="index">
     <InputBuilder
       v-if="field.active"
       :type="field.type"
@@ -9,7 +9,7 @@
       v-model="field.value"
       :name="index"
       :validations="field.validations"
-      :customClass="[customClass]"
+      :customClass="[customClass, index]"
       :mask="field.mask"
       :validationFunction="field.validationFunction"
       @onValidated="onValidated"
@@ -20,10 +20,10 @@
 
 <script>
 import InputBuilder from "@/modules/forms/input-builder/InputBuilder.vue";
-import useCompanyForm from "./composables/useCompanyForm";
+import useShippingForm from "./composables/useShippingForm";
 
 export default {
-  name: "CompanyForm",
+  name: "ShippingForm",
   components: {
     InputBuilder,
   },
@@ -34,10 +34,11 @@ export default {
     },
   },
   setup() {
-    const { companyForm, isDisabled, onValidated } = useCompanyForm();
+    const { shippingForm, isDisabled, onValidated } = useShippingForm();
+
     return {
       isDisabled,
-      companyForm,
+      shippingForm,
       onValidated
     };
   },

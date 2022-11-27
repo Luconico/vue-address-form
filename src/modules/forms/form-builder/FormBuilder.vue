@@ -34,6 +34,14 @@ export default {
       type: String,
       default: null,
     },
+    body: {
+      type: Object,
+      default:  () => ({}),
+    },
+    headers: {
+      type: Object,
+      default: () => ({}),
+    },
     successMessage: {
       type: String,
       default: 'Form submitted successfully',
@@ -67,8 +75,9 @@ export default {
       messages,
       onSumbit: () => {
         formValues.value = {};
-  
-        store.getters['formBuilder/pressentModules'].map((module) => {
+        messages.value = [];
+
+        store.getters['formBuilder/pressentModules'].forEach((module) => {
           store.dispatch(`${module}Form/submit`);
           const { fields } = store.getters[`${module}Form/formValues`];
           formValues.value = { ...formValues.value, ...fields };
@@ -76,19 +85,28 @@ export default {
 
         store.dispatch("formBuilder/isSubmitting", true);
         console.log(formValues);
-        dtxApi
-          .post(props.url, formValues)
-          .then((response) => {
-            console.log(response);
+        const method = props.initialValues ? 'patch' : 'post';
+        dtxApi(
+          method,
+          props.url,
+          {
+            ...props.body,
+            ...formValues.value
+          },
+          {
+            ...props.headers,
+          })
+        .then((response) => {
+            console.log('response',response);
             store.dispatch("formBuilder/isSubmitting", false);
             store.dispatch("formBuilder/isSubmited", true);
             messages.value = [{ msgType: "success", value: props.successMessage }];
             emit("onSubmit", {ok: true, data: response.data});
           })
           .catch((error) => {
-            console.log(error);
+            console.log('error', error);
             store.dispatch("formBuilder/isSubmitting", false);
-            messages.value = [{ msgType: "error", value: props.errorMessage }];
+            messages.value = error.response.data.message.map((msg) => ({ msgType: "error", value: msg }));
             emit("onSubmit", {ok: false, data: error});
           });
       },

@@ -1,21 +1,23 @@
 {
-  "companyName": "Nombre o Empresa",
-  "cif": "Número de identificación fiscal", 
-  "colegiate": "Número de colegiado",
+  "name": "Nombre completo o razón social",
+  "taxIdNumber": "Identificador fiscal (DNI/NIE/CIF...)", 
+  "collegiateNumber": "Número de colegiado",
   "phone": "Teléfono",
   "country": "País",
-  "address": "Dirección",
-  "zipCode": "Código postal",
-  "city": "Ciudad",
-  "province": "Provincia",
-  "moreInfo": "Información adicional",
+  "thoroughfare": "Dirección (Calle nº)",
+  "zip": "Código postal",
+  "locality": "Ciudad",
+  "area": "Provincia",
+  "info": "Información adicional",
   "selectOptions": {
     "country": {
       "ES": "España",
       "DE": "Alemania", 
       "AD": "Andorra",
       "FR": "Francia",
-      "EN": "Reino Unido"
+      "EN": "Reino Unido",
+      "IT": "Italia",
+      "PT": "Portugal"
     }
   },
   "msg": {

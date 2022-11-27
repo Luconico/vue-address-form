@@ -10,24 +10,24 @@ export const setSelectOptions = (state, { newSelect }) => {
     if (!exist) state.selectOptions = [...state.selectOptions, newSelect]
 }
 
-export const setForm = (state, { companyForm }) => {
-    state.companyForm = companyForm
+export const setForm = (state, { shippingForm }) => {
+    state.shippingForm = shippingForm
 }
 
 
 export const setFormValues = (state) => {
     state.formValues = {
         fields: {
-            ...getCleanFormValues(state.companyForm.fields)
+            ...getCleanFormValues(state.shippingForm.fields)
         }
     }
 }
 
 export const setIsValid = (state, { isValid, field }) => {
-    Object.entries(state.companyForm.fields).forEach(([key,value]) => {
-         if (value.validations.length === 0 || !value.active) value.valid = true
-         if (key === field) value.valid = isValid
+    Object.entries(state.shippingForm.fields).forEach(([key,value]) => {
+        if (key === field) value.valid = isValid
+        if (value.validations.length === 0 || !value.active) value.valid = true
     })
-    const allFieldsValid = Object.values(state.companyForm.fields).every((field) => field.valid)
+    const allFieldsValid = Object.values(state.shippingForm.fields).every((field) => field.valid)
     state.isValid = allFieldsValid
 }

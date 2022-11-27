@@ -1,0 +1,161 @@
+ [
+        {
+            "forCountry": ["ES"],
+            "fields": {
+                "area": {
+                    "value": "",
+                    "validations": [],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "locality": {
+                    "value": "",
+                    "validations": ["required"],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "zip": {
+                    "value": "",
+                    "validations": ["required", "minLength:2"],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "thoroughfare": {
+                    "value": "",
+                    "validations": ["required"],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "info": {
+                    "value": "",
+                    "validations": [],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                }
+            }
+        },
+        {
+            "forCountry": ["PT"],
+            "fields": {
+                "area": {
+                    "value": "",
+                    "validations": [],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "locality": {
+                    "value": "",
+                    "validations": ["required"],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "zip": {
+                    "value": "",
+                    "validations": ["required", "minLength:2"],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "zip2": {
+                    "value": "",
+                    "validations": ["required"],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "thoroughfare": {
+                    "value": "",
+                    "validations": ["required"],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "info": {
+                    "value": "",
+                    "validations": [],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                }
+            }
+        },
+        {
+            "forCountry": ["default", "FR", "DE", "IT", "GB"],
+            "fields": {
+                "area": {
+                    "value": "",
+                    "validations": [],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "locality": {
+                    "value": "",
+                    "validations": ["required"],
+                    "active": false,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "zip": {
+                    "value": "",
+                    "validations": ["required", "minLength:2"],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "thoroughfare": {
+                    "value": "",
+                    "validations": ["required"],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                },
+                "info": {
+                    "value": "",
+                    "validations": [],
+                    "active": true,
+                    "valid": false,
+                    "type": "text",
+                    "validationFunction": null,
+                    "mask": null
+                }
+            }
+        }
+    ]

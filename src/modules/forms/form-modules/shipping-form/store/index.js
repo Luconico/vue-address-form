@@ -5,7 +5,7 @@ import * as getters from './getters'
 import * as mutations from './mutations'
 
 
-const companyFormModule = {
+const shippingFormModule = {
     namespaced: true,
     actions,
     getters,
@@ -14,4 +14,4 @@ const companyFormModule = {
 }
 
 
-export default companyFormModule
+export default shippingFormModule

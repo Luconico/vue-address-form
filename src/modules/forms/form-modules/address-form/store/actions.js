@@ -1,4 +1,5 @@
 
+import * as forms from '../options/forms.json'
 
 
 export const getCountrySelect = async ({ commit }, country) => {
@@ -11,6 +12,7 @@ export const getCountrySelect = async ({ commit }, country) => {
                 { value: 'ES' },
                 { value: 'DE' },
                 { value: 'AD' },
+                { value: 'PT' },
             ]
         },
         EN: {
@@ -59,163 +61,9 @@ export const getProvinceSelect = async ({ commit }, country) => {
 }
 
 export const getAddressForm = async ({ commit }, country) => {
-    commit('setFetching', { isFetching: true })
-    const form = {
-        ES: {
-            fields: {
-                address: {
-                    value: '',
-                    validations: ['required'],
-                    active: true,
-                    valid: false,
-                    type: 'text',
-                    validationFunction: null,
-                    mask: null,
-                },
-                moreInfo: {
-                    value: '',
-                    validations: [],
-                    active: true,
-                    valid: false,
-                    type: 'text',
-                    validationFunction: null,
-                    mask: null,
-                },
-                zipCode: {
-                    value: '',
-                    validations: ['required', 'minLength:5', 'maxLength:5'],
-                    active: true,
-                    valid: false,
-                    type: 'text',
-                    validationFunction: null,
-                    mask: null,
-                },
-                city: {
-                    value: '',
-                    validations: ['required'],
-                    active: true,
-                    valid: false,
-                    type: 'text',
-                    validationFunction: null,
-                    mask: null,
-                },
-                province: {
-                    value: '',
-                    validations: ['required'],
-                    active: true,
-                    valid: false,
-                    type: 'select',
-                    validationFunction: null,
-                    mask: null,
-                },
-            }
-        },
-        DE: {
-            fields: {
-                address: {
-                    value: '',
-                    validations: ['required'],
-                    active: true,
-                    valid: false,
-                    type: 'text',
-                    validationFunction: null,
-                    mask: null,
-                },
-                zipCode: {
-                    value: '',
-                    validations: ['required'],
-                    active: true,
-                    valid: false,
-                    type: 'text',
-                    validationFunction: null,
-                    mask: null,
-                },
-                city: {
-                    value: '',
-                    validations: ['required'],
-                    active: false,
-                    valid: false,
-                    type: 'text',
-                    validationFunction: null,
-                    mask: null,
-                },
-                province: {
-                    value: '',
-                    validations: [],
-                    active: false,
-                    valid: false,
-                    type: 'select',
-                    validationFunction: null,
-                    mask: null,
-                },
-                moreInfo: {
-                    value: '',
-                    validations: [],
-                    active: true,
-                    valid: false,
-                    type: 'textarea',
-                    validationFunction: null,
-                    mask: null,
-                },
-            }
-        },
-        EN: {
-            fields: {
-                address: {
-                    value: '',
-                    validations: ['required'],
-                    active: true,
-                    valid: false,
-                    type: 'text',
-                    validationFunction: null,
-                    mask: null,
-                },
-                zipCode: {
-                    value: '',
-                    validations: ['required'],
-                    active: true,
-                    valid: false,
-                    type: 'text',
-                    validationFunction: null,
-                    mask: null,
-                },
-                city: {
-                    value: '',
-                    validations: ['required'],
-                    active: true,
-                    valid: false,
-                    type: 'text',
-                    validationFunction: null,
-                    mask: null,
-                },
-                province: {
-                    value: '',
-                    validations: ['required'],
-                    active: false,
-                    valid: false,
-                    type: 'select',
-                    validationFunction: null,
-                    mask: null,
-                },
-                moreInfo: {
-                    value: '',
-                    validations: [],
-                    active: true,
-                    valid: false,
-                    type: 'textarea',
-                    validationFunction: null,
-                    mask: null,
-                },
-            }
-        }
-    }// TODO: REQUEST FOR FORM
-    const addressForm = form[country]
-    if (!addressForm) return
-    setTimeout(() => {
-        commit('setForm', { addressForm })
-        commit('setFetching', { isFetching: false })
-    }, 500)
-
+    let addressForm = forms.filter((form) => form.forCountry.includes(country.toUpperCase()))[0]
+    if (!addressForm) addressForm = forms.filter((form) => form.forCountry.includes('default'))[0]
+    commit('setForm', { addressForm })
 }
 
 
