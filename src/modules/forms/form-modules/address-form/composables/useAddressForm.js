@@ -6,6 +6,7 @@ const useAddressForm = (props) => {
 
   const store = useStore()
   const country = ref('')
+  const countryInitialValue = ref(null)
   const addressForm = computed(() => store.getters['addressForm/form'])
 
   onBeforeMount(() => {
@@ -13,7 +14,8 @@ const useAddressForm = (props) => {
   })
 
   onMounted(async () => {
-    country.value = props.location.toUpperCase()
+    countryInitialValue.value = store.getters['formBuilder/initialValues']['country']
+    country.value = countryInitialValue.value ? countryInitialValue.value : props.location.toUpperCase()
     store.dispatch('addressForm/getCountrySelect', props.location)
   })
 
@@ -31,7 +33,7 @@ const useAddressForm = (props) => {
     isDisabled: computed(() => store.getters['formBuilder/isDisabled']),
     selectOptions: {
       country: computed(() => store.getters['addressForm/selectOptions']('country')),
-      province: computed(() => store.getters['addressForm/selectOptions']('province'))
+      area: computed(() => store.getters['addressForm/selectOptions']('area'))
     },
   };
 

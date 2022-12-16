@@ -35,7 +35,7 @@ export const getCountrySelect = async ({ commit }, country) => {
 export const getProvinceSelect = async ({ commit }, country) => {
     const provinces = {
         ES: {
-            select: 'province',
+            select: 'area',
             translate: false,
             options: [
                 { value: 'Madrid' },

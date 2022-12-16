@@ -44,18 +44,44 @@ export default {
     const store = useStore();
     const location = ref(LOCATION);
 
-    const initialValues = null;
-    document.cookie = "SESS322b04e17d937aa49b2811a468603011=LcY6B5BRshMktFRHajYhxM_plauXfeptKYPq6gmE9fw; Path=/; Expires=Sun, 26 Nov 2023 17:20:02 GMT;";
+    const initialValues = {
+      id: "126399",
+      uid: "38886",
+      name: "Nombre",
+      phone: "555888777",
+      status: "1",
+      isDefault: false,
+      address: {
+        country: "DE",
+        area: "C",
+        locality: "madrid",
+        zip: "28024",
+        thoroughfare: "direccion",
+        info: "dir addic",
+      },
+      taxIdNumber: "50552730",
+      collegiateNumber: "1234",
+    };
+    const baseURL = "http://192.168.1.100:3000";
+    const path = `api/address/billing`;
+    const targetId = "126399"; // En caso de que sea un update
+
+    const url = `${baseURL}/${path}${targetId ? `/${targetId}` : ""}?context[country]=${location.value.toUpperCase()}`;
+
+    const body = {
+      // uid: "38886", // En caso de hacer un POST
+      isDefault: true,
+    };
+    const headers = {
+      csrftoken: "n2LjCxExXQIT3vvtCllzxsXSxccQ8ZlVTD26CYY0hCw",
+    };
+
     return {
       location,
       initialValues,
-      url: `http://192.168.1.100:3000/api/address/billing?context[country]=${location.value.toUpperCase()}`,
-      body: {
-        uid: "38886"
-      },
-      headers: {
-        csrftoken: "n2LjCxExXQIT3vvtCllzxsXSxccQ8ZlVTD26CYY0hCw",
-      },
+      url,
+      body,
+      headers,
       isValid: computed(() => store.getters["formBuilder/isValid"]),
       isSubmitting: computed(() => store.getters["formBuilder/isSubmitting"]),
       inputClass: "custom-form-group mb-4",
@@ -88,4 +114,3 @@ export default {
   box-shadow: 0px 0px 5px 0px #ffc107;
 }
 </style>
-
