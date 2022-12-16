@@ -21,11 +21,10 @@
         :disabled="disabled"
         v-maska="pattern"
       />
+      <template  v-if="modelValue.length > 0 && filteredValues.length > 0 && isFocus" >
       <div class="suggestions-container">
         <div
-          class="suggestions-list"
-          v-if="modelValue.length > 0 && filteredValues.length > 0 && isFocus" 
-        >
+          class="suggestions-list">
           <span
             v-for="value in filteredValues"
             :key="value"
@@ -34,14 +33,14 @@
           ></span>
         </div>
       </div>
+      </template>
       <div class="error-message-container" v-if="errorMessage">
         <div 
           class="error-message" 
           :class="{
             'text-danger': isError, 
             'text-warning': isWarning
-            }
-        ">
+            }">
          * {{ $t(errorMessage.value, errorMessage.options) }}
           </div>
       </div>
@@ -256,20 +255,4 @@ export default {
 
 <style scoped>
 
-.input-label {
-  font-weight: 700;
-}
-
-.required-field {
-  color: orange;
-}
-
-select {
-  height: 36px;
-  padding-bottom: 5px;
-}
-
-input {
-  padding: 5px;
-}
 </style>

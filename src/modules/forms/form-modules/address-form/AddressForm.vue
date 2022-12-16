@@ -75,23 +75,5 @@ export default {
 </script>
 
 <style>
-.address-container {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  position: relative;
-  margin: 1em 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content:  space-between;
-}
 
-.address-container > div {
-  width: 100%;
-}
-
-.address-container .zipCode,
-.address-container .city,
-.address-container .province {
-  width: 31%;
-}
 </style>
